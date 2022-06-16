@@ -1,0 +1,9 @@
+function test2 returns boolean;
+
+begin
+    if 1+1=8:
+        returns true;
+    else:
+        returns false;
+    endif;
+end;
