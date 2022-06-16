@@ -1,0 +1,6 @@
+-- Function comiles sucessfully; testing boolean 
+
+function test2 returns boolean;
+begin
+  10 - 10 >= 0 and 9 + 9 = 18;
+end;  
