@@ -1,0 +1,11 @@
+-- Function with 4 lexical errors
+
+function test3 returns real;
+  x: integer is (2 * 3.0) % 2;
+begin
+  if x > 10:
+    1. + s;
+  else:
+    $0;
+  endif;
+end;
