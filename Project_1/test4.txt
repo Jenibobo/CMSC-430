@@ -1,0 +1,11 @@
+// Fuction with lexical errors
+
+function main test_4: integer returns integer;
+    b# integer is a * 2;
+begin@
+    if a [=] 0 then
+        b $ b;
+    else
+        b * b;
+    endif;
+end;

@@ -1,0 +1,11 @@
+-- Function testing math ops
+
+function test3 returns real;
+  x: integer is (2 * 3.0) rem 2;
+begin
+  if x < 1 then
+    3 / 100;
+  else
+    0;
+  endif;
+end;

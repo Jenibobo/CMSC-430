@@ -14,14 +14,9 @@ using namespace std;
 #include "listing.h"
 
 static int lineNumber;
-// static string error = "";
 static int totalErrors = 0;
 static queue<string> error;
 static int error_arr[] = {0, 0, 0}; // index_0=lex_err, index_1=syntax_err, index_2=sem_err
-
-// static int lex_err = 0; // Added var for lexical error count
-// static int syntax_err = 0; // Added var for syntax error count
-// static int sem_err = 0; // Added var for semantic error count
 
 static void displayErrors();
 
