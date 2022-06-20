@@ -18,13 +18,12 @@ using namespace std;
 
 ws			[ \t\r]+
 line		[\n]
-comment		(\-\-.*{line})|(\/\/.*{line})
+comment		(\-\-.*{line})|(\/\/.*{line}) 
 id			[A-Za-z]([_]?[A-Za-z0-9])*
 digit		[0-9]
 int			-?{digit}+
 punc		[\(\),:;]
-real_lit	{int}*\.?{digit}+([eE][+-]?{int}+)?
-
+real_lit	{int}*\.?{digit}+([eE][+-]?{digit}+)?
 %%
 
 {ws}		{ ECHO; }
@@ -47,14 +46,20 @@ real_lit	{int}*\.?{digit}+([eE][+-]?{int}+)?
 "**"		{ ECHO; return(EXPOP); }  
 
 begin		{ ECHO; return(BEGIN_); }
-boolean		{ ECHO; return(BOOLEAN); }
 end			{ ECHO; return(END); }
-endreduce	{ ECHO; return(ENDREDUCE); }
 function	{ ECHO; return(FUNCTION); }
-integer		{ ECHO; return(INTEGER); }
 is			{ ECHO; return(IS); }
-reduce		{ ECHO; return REDUCE; }
 returns		{ ECHO; return(RETURNS); }
+
+reduce		{ ECHO; return(REDUCE); }
+endreduce	{ ECHO; return(ENDREDUCE); }
+
+real		{ ECHO; return(REAL); }
+boolean		{ ECHO; return(BOOLEAN); }
+integer		{ ECHO; return(INTEGER); }
+
+true		{ ECHO; return(BOOL_LITERAL); }
+false		{ ECHO; return(BOOL_LITERAL); }
 
 rem			{ ECHO; return(REMOP); }
 
@@ -68,12 +73,9 @@ if			{ ECHO; return(IF); }
 else		{ ECHO; return(ELSE); }
 endif		{ ECHO; return(ENDIF); }
 others		{ ECHO; return(OTHERS); }
-real		{ ECHO; return(REAL); }
+"=>"		{ ECHO; return(ARROW); }
 then		{ ECHO; return(THEN); }
 when		{ ECHO; return(WHEN); }
-
-true		{ ECHO; return(BOOL_LITERAL); }
-false		{ ECHO; return(BOOL_LITERAL); }
 
 {id}		{ ECHO; return(IDENTIFIER); }
 {int}		{ ECHO; return(INT_LITERAL); }

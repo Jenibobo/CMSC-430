@@ -1,11 +1,23 @@
--- Function testing math ops
+// Function testing case testing all lexemes.
 
 function test3 returns real;
-  x: integer is (2 * 3.0) rem 2;
+  x_1: integer is (2 * 3.0) rem 2;
+
 begin
-  if x < 1 then
-    3 / 100;
+  if x_1 then
+
+    case x_1 is
+      when 0 => x_1 - 0;
+      when 1 => x_1 + 1;
+      others => x_1 / 3;
+    endcase;
+
   else
-    0;
+    if x_1 >= 3 and not x < 0 then
+      x ** 3;
+    else
+      returns x_1;
+    endif;
+
   endif;
 end;
