@@ -62,6 +62,8 @@ void appendError(ErrorCategories errorCategory, string message) {
 	// printf("%s\n", message.c_str());
 	// printf("%s\n", (messages[errorCategory] + message).c_str());
 	error_arr[errorCategory]++;
+	// printf("%s\n", (messages[errorCategory] + message).c_str());
+
 }
 
 void displayErrors() {
