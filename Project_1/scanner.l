@@ -23,6 +23,7 @@ id		[A-Za-z_][A-Za-z_0-9]* // Adding underscores to the id --> [A-Za-z]([A-Za-z0
 digit		[0-9]
 int		[+-]?{digit}+
 punc		[\(\),:;]
+real_lit	{int}(.{digit}*)?|.{digit}+)([eE]{digit}+)?)
 %%
 
 {ws}		{ ECHO; }
