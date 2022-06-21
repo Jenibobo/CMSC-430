@@ -19,8 +19,8 @@ using namespace std;
 ws		[ \t\r]+
 comment		\-\-.*\n
 line		[\n]
-id		[A-Za-z][A-Za-z0-9]* // Adding underscores to the id --> [A-Za-z]([A-Za-z0-9][_]?[A-Za-z0-9])*
-digit		[0-9]
+id		[A-Za-z_][A-Za-z_0-9]* // Adding underscores to the id --> [A-Za-z]([A-Za-z0-9][_]?[A-Za-z0-9])*
+digit		[+-]?[0-9]
 int		{digit}+
 punc		[\(\),:;]
 %%
