@@ -18,32 +18,31 @@ using namespace std;
 
 ws			[ \t\r]+
 line		[\n]
-comment	(\-\-.*{line})|(\/\/.*{line}) 
+comment		(\-\-.*{line})|(\/\/.*{line}) 
 id			[A-Za-z]([_]?[A-Za-z0-9])*
 digit		[0-9]
-int		-?{digit}+
+int			[+-]?{digit}+
 punc		[\(\),:;]
+
 real_lit	{int}*\.?{digit}+([eE][+-]?{digit}+)?
+bool_lit 	true|false
+relop		"<"|">"|"<="|">="|"/="|"="
+addop		"+"|"-"
+mulop		"*"|"/"
+expop		"**"
+
+arrow		"=>"
 %%
 
 {ws}		{ ECHO; }
 {comment}	{ ECHO; nextLine(); }
 {line}		{ ECHO; nextLine(); }
-
-"<"			{ ECHO; return(RELOP); }
-"="			{ ECHO; return(RELOP); }
-"/="		{ ECHO; return(RELOP); }
-">"			{ ECHO; return(RELOP); }
-">="		{ ECHO; return(RELOP); }
-"<="		{ ECHO; return(RELOP); }
-
-"+"			{ ECHO; return(ADDOP); }
-"-"			{ ECHO; return(ADDOP); }
-
-"*"			{ ECHO; return(MULOP); }
-"/"			{ ECHO; return(MULOP); }
-
-"**"		{ ECHO; return(EXPOP); }  
+{relop}		{ ECHO; return(RELOP); }
+{addop}		{ ECHO; return(ADDOP); }
+{mulop}		{ ECHO; return(MULOP); }
+{expop}		{ ECHO; return(EXPOP); }
+{bool_lit}	{ ECHO; return(BOOL_LITERAL); }
+{real_lit}	{ ECHO; return(REAL_LITERAL); }
 
 begin		{ ECHO; return(BEGIN_); }
 end			{ ECHO; return(END); }
@@ -53,13 +52,6 @@ returns		{ ECHO; return(RETURNS); }
 
 reduce		{ ECHO; return(REDUCE); }
 endreduce	{ ECHO; return(ENDREDUCE); }
-
-real		{ ECHO; return(REAL); }
-boolean		{ ECHO; return(BOOLEAN); }
-integer		{ ECHO; return(INTEGER); }
-
-true		{ ECHO; return(BOOL_LITERAL); }
-false		{ ECHO; return(BOOL_LITERAL); }
 
 rem			{ ECHO; return(REMOP); }
 
@@ -73,13 +65,16 @@ if			{ ECHO; return(IF); }
 else		{ ECHO; return(ELSE); }
 endif		{ ECHO; return(ENDIF); }
 others		{ ECHO; return(OTHERS); }
-"=>"		{ ECHO; return(ARROW); }
+{arrow}		{ ECHO; return(ARROW); }
 then		{ ECHO; return(THEN); }
 when		{ ECHO; return(WHEN); }
 
+real		{ ECHO; return(REAL); }
+boolean		{ ECHO; return(BOOLEAN); }
+integer		{ ECHO; return(INTEGER); }
+
 {id}		{ ECHO; return(IDENTIFIER); }
 {int}		{ ECHO; return(INT_LITERAL); }
-{real_lit}	{ ECHO; return(REAL_LITERAL); }
 {punc}		{ ECHO; return(yytext[0]); }
 .			{ ECHO; appendError(LEXICAL, yytext); }
 %%

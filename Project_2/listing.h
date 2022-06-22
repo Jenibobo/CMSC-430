@@ -1,4 +1,4 @@
-// CMSC 430
+// Compiler Theory and Design
 // Dr. Duane J. Jarc
 
 // This file contains the function prototypes for the functions that produce the // compilation listing
