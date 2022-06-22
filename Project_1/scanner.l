@@ -24,7 +24,7 @@ digit		[0-9]
 int			[+-]?{digit}+
 punc		[\(\),:;]
 
-real_lit	{int}*\.?{digit}+([eE][+-]?{digit}+)?
+real_lit	{digit}*\.?{digit}+([eE][+-]?{digit}+)?
 bool_lit 	true|false
 relop		"<"|">"|"<="|">="|"/="|"="
 addop		"+"|"-"
