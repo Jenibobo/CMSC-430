@@ -873,7 +873,7 @@ YY_RULE_SETUP
 case 7:
 YY_RULE_SETUP
 #line 43 "scanner.l"
-{ ECHO; return(EXEOP); }
+{ ECHO; return(EXPOP); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP

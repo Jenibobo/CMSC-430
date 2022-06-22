@@ -29,7 +29,7 @@ bool_lit 	true|flase
 relop		"<"|">"|"<="|">="|"/="|"="
 addop		"+"|"-"
 mulop		"*"|"/"
-exeop		"**"
+expop		"**"
 
 arrow		"=>"
 %%
@@ -40,7 +40,7 @@ arrow		"=>"
 {relop}		{ ECHO; return(RELOP); }
 {addop}		{ ECHO; return(ADDOP); }
 {mulop}		{ ECHO; return(MULOP); }
-{exeop}		{ ECHO; return(EXEOP); }
+{expop}		{ ECHO; return(EXPOP); }
 {bool_lit}	{ ECHO; return(BOOL_LITERAL); }
 {real_lit}	{ ECHO; return(REAL_LITERAL); }
 
