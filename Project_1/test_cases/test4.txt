@@ -1,6 +1,6 @@
-// Fuction with 6 lexical errors
+// Fuction with 7 lexical errors
 
-function main test_4: integer returns integer;
+function main test4_: integer returns integer;
     b# integer is a * 2;
 
 begin@

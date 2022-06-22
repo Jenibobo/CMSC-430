@@ -1,6 +1,6 @@
 // Function testing case testing all lexemes.
 
-function test3 returns real;
+function test_3 returns real;
   x_1: integer is (2 * 3.0) rem 2;
 
 begin

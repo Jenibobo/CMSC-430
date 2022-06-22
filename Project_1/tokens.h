@@ -32,7 +32,7 @@ enum Tokens {
 	OROP,
 	NOTOP,
 	REMOP,
-	EXPOP,
+	EXEOP,
 	REAL_LITERAL,
 	BOOL_LITERAL
 };
