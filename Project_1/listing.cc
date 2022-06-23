@@ -64,8 +64,8 @@ void appendError(ErrorCategories errorCategory, string message) {
 	// printf("%s\n", message.c_str());
 	// printf("%s\n", (messages[errorCategory] + message).c_str());
 
-	if (errorCategory == 3 or errorCategory == 4) {
-		printf("%4d\n", errorCategory);
+	if (errorCategory >= 2) {
+		// printf("%4d\n", errorCategory);
 		error_arr[2]++;
 	}
 	error_arr[errorCategory]++;
