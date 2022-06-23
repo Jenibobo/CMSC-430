@@ -7,7 +7,7 @@
 #include <cstdio>
 #include <string>
 #include <queue>
-
+#include <iostream>
 
 using namespace std;
 
@@ -16,7 +16,7 @@ using namespace std;
 static int lineNumber;
 static int totalErrors = 0;
 static queue<string> errors;
-static int error_arr[] = {0, 0, 0}; // index_0=lex_err, index_1=syntax_err, index_2=sem_err
+static int error_arr[] = {0, 0, 0, 0, 0}; // index_0=lex_err, index_1=syntax_err, indexs_2,3,4=sem_err
 
 static void displayErrors();
 
@@ -58,12 +58,19 @@ void appendError(ErrorCategories errorCategory, string message) {
 		"Semantic Error, Duplicate Identifier: ",
 		"Semantic Error, Undeclared " 
 		};
+
 	errors.push(messages[errorCategory] + message + "\n");
+
 	// printf("%s\n", message.c_str());
 	// printf("%s\n", (messages[errorCategory] + message).c_str());
-	error_arr[errorCategory]++;
-	// printf("%s\n", (messages[errorCategory] + message).c_str());
 
+	if (errorCategory == 3 or errorCategory == 4) {
+		printf("%4d\n", errorCategory);
+		error_arr[2]++;
+	}
+	error_arr[errorCategory]++;
+
+	// printf("%s\n", (messages[errorCategory] + message).c_str());
 }
 
 void displayErrors() {
