@@ -78,7 +78,7 @@ void appendError(ErrorCategories errorCategory, string message) {
 		case 1:
 			syntax_err++;
 			break;
-		other:
+		case >2:
 			sem_err++;
 			break;
 	}
