@@ -1,5 +1,9 @@
 /* Compiler Theory and Design
-   Dr. Duane J. Jarc */
+   // Dr. Duane J. Jarc
+
+	// Code edited by: Jennifer McClintock
+	// Date: 25 June 2022
+	// Code edited in order to add the additional lexemes need for our course language.
 
 /* This file contains flex input file */
 

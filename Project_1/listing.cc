@@ -4,6 +4,12 @@
 // This file contains the bodies of the functions that produces the compilation
 // listing
 
+// Code edited by: Jennifer McClintock
+// Date: 25 June 2022
+// Code edited to be able to tally the number of lex, syn, and sem errors found in 
+// the course's made up language. The error type is added to the error array and then
+// incrmented if additionals are found before being displayed in the print statment.
+
 #include <cstdio>
 #include <string>
 #include <queue>
