@@ -4,10 +4,16 @@
 // This file contains the bodies of the functions that produces the compilation
 // listing
 
+// Code edited by: Jennifer McClintock
+// Date: 25 June 2022
+// Code edited to be able to tally the number of lex, syn, and sem errors found in 
+// the course's made up language. The error type is added to the error array and then
+// incrmented if additionals are found before being displayed in the print statment.
+
 #include <cstdio>
 #include <string>
 #include <queue>
-
+#include <iostream>
 
 using namespace std;
 
@@ -16,7 +22,7 @@ using namespace std;
 static int lineNumber;
 static int totalErrors = 0;
 static queue<string> errors;
-static int error_arr[] = {0, 0, 0}; // index_0=lex_err, index_1=syntax_err, index_2=sem_err
+static int error_arr[] = {0, 0, 0, 0, 0}; // index_0=lex_err, index_1=syntax_err, indexs_2,3,4=sem_err
 
 static void displayErrors();
 
@@ -58,12 +64,19 @@ void appendError(ErrorCategories errorCategory, string message) {
 		"Semantic Error, Duplicate Identifier: ",
 		"Semantic Error, Undeclared " 
 		};
+
 	errors.push(messages[errorCategory] + message + "\n");
+
 	// printf("%s\n", message.c_str());
 	// printf("%s\n", (messages[errorCategory] + message).c_str());
-	error_arr[errorCategory]++;
-	// printf("%s\n", (messages[errorCategory] + message).c_str());
 
+	if (errorCategory >= 2) {
+		// printf("%4d\n", errorCategory);
+		error_arr[2]++;
+	} else {
+		error_arr[errorCategory]++;
+	}
+	// printf("%s\n", (messages[errorCategory] + message).c_str());
 }
 
 void displayErrors() {
