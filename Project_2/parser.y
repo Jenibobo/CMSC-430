@@ -1,5 +1,11 @@
 /* Compiler Theory and Design
-   Dr. Duane J. Jarc */
+   	// Dr. Duane J. Jarc 
+
+   	// Code edited by: Jennifer McClintock
+	// Date: 26 June 2022
+	//
+
+*/
 
 %{
 
@@ -17,11 +23,10 @@ void yyerror(const char* message);
 %define parse.error verbose
 
 %token IDENTIFIER
-%token INT_LITERAL
-
-%token ADDOP MULOP RELOP ANDOP
-
+%token INT_LITERAL REAL_LITERAL BOOL_LITERAL
+%token ADDOP MULOP RELOP ANDOP OROP NOTOP REMOP EXPOP
 %token BEGIN_ BOOLEAN END ENDREDUCE FUNCTION INTEGER IS REDUCE RETURNS
+%token REAL IF THEN ELSE ENDIF CASE OTHERS ARROW ENDCASE WHEN 
 
 %%
 
@@ -29,17 +34,28 @@ function:
 	function_header optional_variable body ;
 	
 function_header:	
-	FUNCTION IDENTIFIER RETURNS type ';' ;
+	FUNCTION IDENTIFIER parameters RETURNS type ';' |
+	error ';' ;
 
 optional_variable:
+	/* empty */ |
 	variable |
-	;
+	error ';' ;
 
 variable:
 	IDENTIFIER ':' type IS statement_ ;
 
+parameters:
+	/* empty */ |
+	parameters ',' parameter |
+	parameter ;
+
+parameter:
+	IDENTIFIER ':' type ;
+
 type:
-	INTEGER |
+	INTEGER | 
+	REAL |
 	BOOLEAN ;
 
 body:
@@ -51,11 +67,16 @@ statement_:
 	
 statement:
 	expression |
-	REDUCE operator reductions ENDREDUCE ;
+	REDUCE operator reductions ENDREDUCE |
+	IF expression THEN statement_ ELSE statement_ ENDIF |
+	CASE expression IS case OTHERS ARROW statement_ ENDCASE ;
 
 operator:
 	ADDOP |
 	MULOP ;
+
+case:
+	WHEN INT_LITERAL ARROW statement_ ;
 
 reductions:
 	reductions statement_ |
@@ -63,6 +84,10 @@ reductions:
 		    
 expression:
 	expression ANDOP relation |
+	or_op ;
+
+or_op:
+	expression OROP relation |
 	relation ;
 
 relation:
@@ -70,16 +95,26 @@ relation:
 	term;
 
 term:
-	term ADDOP factor |
-	factor ;
+	term ADDOP rem_op |
+	rem_op ;
       
 factor:
-	factor MULOP primary |
+	factor MULOP exp_op |
+	exp_op ;
+
+rem_op:
+	rem_op REMOP factor |
+	factor ;
+
+exp_op:
+	primary EXPOP exp_op |
 	primary ;
 
 primary:
 	'(' expression ')' |
 	INT_LITERAL | 
+	REAL_LITERAL |
+	BOOL_LITERAL |
 	IDENTIFIER ;
     
 %%

@@ -83,16 +83,16 @@ integer		{ ECHO; return(INTEGER); }
 .			{ ECHO; appendError(LEXICAL, yytext); }
 %%
 
-int main() {
-	firstLine();
+// int main() {
+// 	firstLine();
 	
-	FILE *file = fopen("lexemes.txt", "wa"); 
-	int token = yylex();
-	while (token) {
-		fprintf(file, "%d %s\n", token, yytext);
-		token = yylex();
-	}
-	lastLine();
-	fclose(file);
-	return 0;
-}
+// 	FILE *file = fopen("lexemes.txt", "wa"); 
+// 	int token = yylex();
+// 	while (token) {
+// 		fprintf(file, "%d %s\n", token, yytext);
+// 		token = yylex();
+// 	}
+// 	lastLine();
+// 	fclose(file);
+// 	return 0;
+// }
