@@ -25,17 +25,17 @@ line		[\n]
 comment		(\-\-.*{line})|(\/\/.*{line}) 
 id			[A-Za-z]([_]?[A-Za-z0-9])*
 digit		[0-9]
-int			[+-]?{digit}+
+int_lit		[0-9]+
 punc		[\(\),:;]
 
-real_lit	{digit}*\.?{digit}+([eE][+-]?{digit}+)?
-bool_lit 	true|false
-relop		"<"|">"|"<="|">="|"/="|"="
-addop		"+"|"-"
-mulop		"*"|"/"
-expop		"**"
+real_lit	[0-9]*\.?[0-9]+([eE][+-]?[0-9]+)?
+bool_lit 	(true|false)
+relop		("<"|">"|"<="|">="|"/="|"=")
+addop		("+"|"-")
+mulop		("*"|"/")
+expop		("**")
 
-arrow		"=>"
+arrow		("=>")
 %%
 
 {ws}		{ ECHO; }
@@ -45,6 +45,8 @@ arrow		"=>"
 {addop}		{ ECHO; return(ADDOP); }
 {mulop}		{ ECHO; return(MULOP); }
 {expop}		{ ECHO; return(EXPOP); }
+
+{int_lit}	{ ECHO; return(INT_LITERAL); }
 {bool_lit}	{ ECHO; return(BOOL_LITERAL); }
 {real_lit}	{ ECHO; return(REAL_LITERAL); }
 
@@ -78,7 +80,6 @@ boolean		{ ECHO; return(BOOLEAN); }
 integer		{ ECHO; return(INTEGER); }
 
 {id}		{ ECHO; return(IDENTIFIER); }
-{int}		{ ECHO; return(INT_LITERAL); }
 {punc}		{ ECHO; return(yytext[0]); }
 .			{ ECHO; appendError(LEXICAL, yytext); }
 %%

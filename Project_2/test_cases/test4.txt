@@ -1,0 +1,13 @@
+// Fuction with 7 lexical errors
+
+function main test4_: integer returns integer;
+    b# integer is a * 2;
+
+begin@
+
+    if a [=] 0 then
+        b $ b;
+    else
+        b * b^3;
+    endif;
+end;

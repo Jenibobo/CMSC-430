@@ -31,91 +31,117 @@ void yyerror(const char* message);
 %%
 
 function:	
-	function_header optional_variable body ;
+	function_header optional_variable body 
+	;
 	
 function_header:	
-	FUNCTION IDENTIFIER parameters RETURNS type ';' |
-	error ';' ;
-
-optional_variable:
-	/* empty */ |
-	variable |
-	error ';' ;
-
-variable:
-	IDENTIFIER ':' type IS statement_ ;
+	FUNCTION IDENTIFIER parameters RETURNS type ';' 
+	| error ';' 
+	;
 
 parameters:
-	/* empty */ |
-	parameters ',' parameter |
-	parameter ;
+	/* empty */ 
+	| parameters ',' parameter 
+	| parameter 
+	;
 
 parameter:
-	IDENTIFIER ':' type ;
+	IDENTIFIER ':' type 
+	;
 
 type:
-	INTEGER | 
-	REAL |
-	BOOLEAN ;
+	INTEGER 
+	| REAL 
+	| BOOLEAN 
+	;
+
+optional_variable:
+	/* empty */ 
+	| optional_variable variable 
+	| error ';' 
+	;
+
+variable:
+	IDENTIFIER ':' type IS statement_ 
+	;
+
+statement_:
+	statement ';' 
+	| error ';' 
+	;
 
 body:
-	BEGIN_ statement_ END ';' ;
-    
-statement_:
-	statement ';' |
-	error ';' ;
+	BEGIN_ statement_ END ';' 
+	;
 	
 statement:
-	expression |
-	REDUCE operator reductions ENDREDUCE |
-	IF expression THEN statement_ ELSE statement_ ENDIF |
-	CASE expression IS case OTHERS ARROW statement_ ENDCASE ;
+	expression 
+	| REDUCE operator reductions ENDREDUCE
+	| IF expression THEN statement_ ELSE statement_ ENDIF
+	| CASE expression IS mult_cases OTHERS ARROW statement_ ENDCASE 
+	;
 
 operator:
-	ADDOP |
-	MULOP ;
+	ADDOP 
+	| MULOP 
+	;
+
+mult_cases:
+	/* empty */
+	| mult_cases case
+	;
 
 case:
-	WHEN INT_LITERAL ARROW statement_ ;
+	WHEN INT_LITERAL ARROW statement_ 
+	;
 
 reductions:
-	reductions statement_ |
+	/* empty */ 
+	| reductions statement_ 
 	;
 		    
 expression:
-	expression ANDOP relation |
-	or_op ;
+	expression OROP and_op 
+	| and_op 
+	;
 
-or_op:
-	expression OROP relation |
-	relation ;
+and_op:
+	and_op ANDOP rel_op 
+	| rel_op 
+	;
 
-relation:
-	relation RELOP term |
-	term;
+rel_op:
+	rel_op RELOP add_op 
+	| add_op
+	;
 
-term:
-	term ADDOP rem_op |
-	rem_op ;
+add_op:
+	add_op ADDOP mul_op 
+	| mul_op 
+	;
       
-factor:
-	factor MULOP exp_op |
-	exp_op ;
-
-rem_op:
-	rem_op REMOP factor |
-	factor ;
+mul_op:
+	mul_op MULOP exp_op 
+	| mul_op REMOP exp_op
+	| exp_op 
+	;
 
 exp_op:
-	primary EXPOP exp_op |
-	primary ;
+	primary EXPOP exp_op 
+	| not_op 
+	;
+
+not_op:
+	NOTOP primary
+	| primary 
+	;
 
 primary:
-	'(' expression ')' |
-	INT_LITERAL | 
-	REAL_LITERAL |
-	BOOL_LITERAL |
-	IDENTIFIER ;
+	'(' expression ')' 
+	| INT_LITERAL 
+	| REAL_LITERAL 
+	| BOOL_LITERAL 
+	| IDENTIFIER ;
     
 %%
 

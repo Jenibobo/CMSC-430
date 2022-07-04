@@ -67,21 +67,16 @@ void appendError(ErrorCategories errorCategory, string message) {
 
 	errors.push(messages[errorCategory] + message + "\n");
 
-	// printf("%s\n", message.c_str());
-	// printf("%s\n", (messages[errorCategory] + message).c_str());
-
 	if (errorCategory >= 2) {
-		// printf("%4d\n", errorCategory);
 		error_arr[2]++;
 	} else {
 		error_arr[errorCategory]++;
 	}
-	// printf("%s\n", (messages[errorCategory] + message).c_str());
 }
 
 void displayErrors() {
 	while (!errors.empty()){
-		printf("%s\n", errors.front().c_str());
+		printf("%s", errors.front().c_str());
 		errors.pop();
 	}
 }
