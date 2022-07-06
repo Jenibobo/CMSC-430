@@ -3,7 +3,8 @@
 
    	// Code edited by: Jennifer McClintock
 	// Date: 2 July 2022
-	// Code edited to reflect parsing instructions in order to create the synyax for out course languange. 
+	// Code edited to reflect parsing instructions in order to create the synyax for out course languange.
+	// Comments put in to explain each syntax rule.
 
 */
 
