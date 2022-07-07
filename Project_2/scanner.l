@@ -45,7 +45,6 @@ arrow		("=>")
 {addop}		{ ECHO; return(ADDOP); }
 {mulop}		{ ECHO; return(MULOP); }
 {expop}		{ ECHO; return(EXPOP); }
-
 {int_lit}	{ ECHO; return(INT_LITERAL); }
 {bool_lit}	{ ECHO; return(BOOL_LITERAL); }
 {real_lit}	{ ECHO; return(REAL_LITERAL); }

@@ -1,0 +1,21 @@
+-- A guessing game that tests the use of:
+--      - user passed input
+--      - if statments
+--      - switch case
+
+function test_2 a: integer returns boolean;
+    x: integer is 0;
+begin
+    if (a < 5) and (a > 0) then 
+        case a is
+            when 0 =>  false;
+            when 1 =>  false;
+            when 2 =>  true;
+            when 3 =>  false;
+            when 4 =>  false;
+            others =>  fasle;
+        endcase;
+    else 
+        false;
+    endif;
+end;

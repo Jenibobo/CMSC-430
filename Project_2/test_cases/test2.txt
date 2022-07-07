@@ -1,6 +1,0 @@
--- Function comiles sucessfully; testing boolean, logic ops, and math ops 
-
-function test2 returns boolean;
-begin
-  10 / 10 >= 0 and 9 + 98.6 <= 18 * 0;
-end;
