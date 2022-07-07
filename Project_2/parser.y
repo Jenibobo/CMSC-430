@@ -134,13 +134,14 @@ factor:
 ;
 
 exp_op:
-	primary EXPOP exp_op |
+	exp_op EXPOP unary_op |
+	exp_op '(' unary_op ')' |
 	unary_op
 ;
 
 // NOTOP has highest precedence
 unary_op:
-	unary_op NOTOP primary |
+	NOTOP primary |
 	primary
 ;
 

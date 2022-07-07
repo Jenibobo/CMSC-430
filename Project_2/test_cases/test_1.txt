@@ -1,8 +1,8 @@
 -- Testing the use of:
 --      - optional variables
---      - non-nested if/else statement
+--      - if/else statement
 --      - arithmetic operations
---      - reduce statement
+--      - nested reduce statement
 
 function test_1 returns integer;
     a: integer is 10;

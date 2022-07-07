@@ -50,9 +50,9 @@ int lastLine() {
 		printf(" Lexical Errors: %4d\n", error_arr[0]);
 		printf(" Sytax Errors: %4d\n", error_arr[1]);
 		printf(" Semantic Errors: %4d\n", error_arr[2]);
+		printf(" Total num. of errors: %4d\n", totalErrors);
 	}
 
-	printf("%4d", totalErrors);
 	return totalErrors;
 }
     

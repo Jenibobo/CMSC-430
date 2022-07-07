@@ -4,7 +4,6 @@
 --      - switch case
 
 function test_2 a: integer returns boolean;
-    x: integer is 0;
 begin
     if (a < 5) and (a > 0) then 
         case a is

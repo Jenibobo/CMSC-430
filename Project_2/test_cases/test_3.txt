@@ -1,24 +1,27 @@
-function main param1: integer, param2: integer returns boolean;
-    var1: integer is 100;
-    var2: integer is 10;
-    var_3: boolean is true;
+// Testing the use of:
+//      - all arithmetic operations
+//      - case statements
+//      - the use of real literals/real
 
-    begin
-        if (param1 > var1 or not param2 < var2)
-            then
-                reduce +
-                   10 * 10 + 2;
-                   100 rem 10;
-                   10 * 10 ** 2;
-                   10 - 2;
-                   10 / 5;
-                endreduce;
-        else
-            case var1 is
-                when 0 => var1 - 30;
-                when 1 => var1 + 30;
-                when 2 => var1 * 30;
-                others => var1 = 0;
-            endcase;
-        endif;
-    end;
+function test_3 z: integer returns real;
+    x: real is 9e+3;
+    y: real is 0.54;
+begin
+    if (z >= 0) and (z <= 10) then 
+        case z is
+            when 0 =>  x + z;
+            when 1 =>  y + z;
+            when 2 =>  X * y;
+            when 3 =>  z - y; 
+            when 4 =>  z / x;
+            when 5 =>  y + x;
+            when 6 =>  y - x;
+            when 7 =>  x / y;
+            when 8 =>  z ** y;
+            when 9 =>  z rem y;
+            others =>  y rem x;
+        endcase;
+    else
+        x /= y;
+    endif;
+end;
