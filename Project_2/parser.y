@@ -114,9 +114,9 @@ relation:
 // ******************** Math Ops *************************
 // Precedence of mathmatical operators:
 // 		lowest => ADDOP
-// 			   => MULOP
-//			   => REMOP
-// 	   Highest => EXEOP (right-associative.)
+// 		       => MULOP
+//		       => REMOP
+// 	       Highest => EXEOP (right-associative.)
 term:
 	term ADDOP factor |
 	factor 
