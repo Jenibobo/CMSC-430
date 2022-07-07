@@ -121,7 +121,8 @@ term:
 	term ADDOP factor |
 	factor 
 	;
-      
+ 
+// Adding REMOP as an option for 'factor'
 factor:
 	factor MULOP exp_op |
 	factor REMOP exp_op |
