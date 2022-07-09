@@ -120,7 +120,7 @@ relation:
 // 		lowest => ADDOP
 // 		       => MULOP
 //		       => REMOP
-// 	   Highest => EXEOP (right-associative.)
+// 	   Highest => EXEOP (right-associative)
 term:
 	term ADDOP factor |
 	factor 
@@ -133,9 +133,9 @@ factor:
 	exp_op 
 ;
 
+// Right-recursive/right-associative rule
 exp_op:
-	exp_op EXPOP unary_op |
-	exp_op '(' unary_op ')' |
+	unary_op EXPOP exp_op |
 	unary_op
 ;
 
