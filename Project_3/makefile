@@ -1,5 +1,5 @@
-compile: scanner.o parser.o listing.o values.o
-	g++ -o compile scanner.o parser.o listing.o values.o
+compile: scanner.o parser_test.o listing.o values.o
+	g++ -o compile scanner.o parser_test.o listing.o values.o
 	
 scanner.o: scanner.c values.h listing.h tokens.h
 	g++ -c scanner.c
@@ -8,13 +8,13 @@ scanner.c: scanner.l
 	flex scanner.l
 	mv lex.yy.c scanner.c
 
-parser.o: parser.c values.h listing.h symbols.h
-	g++ -c parser.c
+parser_test.o: parser_test.c values.h listing.h symbols.h
+	g++ -c parser_test.c
 
-parser.c tokens.h: parser.y
-	bison -d -v parser.y
-	mv parser.tab.c parser.c
-	cp parser.tab.h tokens.h
+parser_test.c tokens.h: parser_test.y
+	bison -d -v parser_test.y
+	mv parser_test.tab.c parser_test.c
+	cp parser_test.tab.h tokens.h
 
 listing.o: listing.cc listing.h
 	g++ -c listing.cc

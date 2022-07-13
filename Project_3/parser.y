@@ -34,14 +34,19 @@ int result;
 
 %token <iden> IDENTIFIER
 %token <value> INT_LITERAL
+%token <value> REAL_LITERAL
+%token <value> BOOL_LITERAL
 
-%token <oper> ADDOP MULOP RELOP
-%token ANDOP
+%token <oper> ADDOP MULOP REMOP EXPOP RELOP ARROW
 
-%token BEGIN_ BOOLEAN END ENDREDUCE FUNCTION INTEGER IS REDUCE RETURNS
+%token ADDOP MULOP REMOP EXPOP 
+%token OROP ANDOP RELOP NOTOP
+%token INTEGER REAL BOOLEAN
+%token BEGIN_ END FUNCTION IS RETURNS
+%token REDUCE ENDREDUCE IF THEN ELSE ENDIF CASE WHEN ARROW OTHERS ENDCASE
 
-%type <value> body statement_ statement reductions expression relation term
-	factor primary
+%type <value> body statement_ statement reduction_ expression relation term
+	factor primary case_ case binary_op exp_op unary_op
 %type <oper> operator
 
 %%
