@@ -1,5 +1,5 @@
 // Compiler Theory and Design
-// Duane J. Jarc
+// Dr. Duane J. Jarc
 
 // This file contains the function prototypes for the functions that produce the // compilation listing
 

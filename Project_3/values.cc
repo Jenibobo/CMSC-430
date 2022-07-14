@@ -12,13 +12,25 @@ using namespace std;
 #include "values.h"
 #include "listing.h"
 
-int evaluateIf(){
-
+int evaluate_ifThen(int expr, int if_stat, int else_stat) {
+	if (expr == 1) {
+		return if_stat;
+	} else {
+		return else_stat;
+	}
 }
 
-int evaluateCase(){
+// int evaluateCase_stat(){
 
-}
+// }
+
+// int evaluateCase_mult(){
+
+// }
+
+// int evaluateCase_single(){
+
+// }
 
 int evaluateReduction(Operators operator_, int head, int tail) {
 	if (operator_ == PLUS)

@@ -64,27 +64,22 @@ extern int yydebug;
     EXPOP = 265,                   /* EXPOP  */
     RELOP = 266,                   /* RELOP  */
     NOTOP = 267,                   /* NOTOP  */
-    ARROW = 268,                   /* ARROW  */
-    OROP = 269,                    /* OROP  */
-    ANDOP = 270,                   /* ANDOP  */
-    INTEGER = 271,                 /* INTEGER  */
-    REAL = 272,                    /* REAL  */
-    BOOLEAN = 273,                 /* BOOLEAN  */
-    BEGIN_ = 274,                  /* BEGIN_  */
-    END = 275,                     /* END  */
-    FUNCTION = 276,                /* FUNCTION  */
-    IS = 277,                      /* IS  */
-    RETURNS = 278,                 /* RETURNS  */
-    REDUCE = 279,                  /* REDUCE  */
-    ENDREDUCE = 280,               /* ENDREDUCE  */
-    IF = 281,                      /* IF  */
-    THEN = 282,                    /* THEN  */
-    ELSE = 283,                    /* ELSE  */
-    ENDIF = 284,                   /* ENDIF  */
-    CASE = 285,                    /* CASE  */
-    WHEN = 286,                    /* WHEN  */
-    OTHERS = 287,                  /* OTHERS  */
-    ENDCASE = 288                  /* ENDCASE  */
+    OROP = 268,                    /* OROP  */
+    ANDOP = 269,                   /* ANDOP  */
+    INTEGER = 270,                 /* INTEGER  */
+    REAL = 271,                    /* REAL  */
+    BOOLEAN = 272,                 /* BOOLEAN  */
+    BEGIN_ = 273,                  /* BEGIN_  */
+    END = 274,                     /* END  */
+    FUNCTION = 275,                /* FUNCTION  */
+    IS = 276,                      /* IS  */
+    RETURNS = 277,                 /* RETURNS  */
+    REDUCE = 278,                  /* REDUCE  */
+    ENDREDUCE = 279,               /* ENDREDUCE  */
+    IF = 280,                      /* IF  */
+    THEN = 281,                    /* THEN  */
+    ELSE = 282,                    /* ELSE  */
+    ENDIF = 283                    /* ENDIF  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -93,13 +88,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 29 "parser_test.y"
+#line 31 "parser_test.y"
 
 	CharPtr iden;
 	Operators oper;
 	int value;
 
-#line 103 "parser_test.tab.h"
+#line 98 "parser_test.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

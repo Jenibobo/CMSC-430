@@ -1,6 +1,9 @@
--- Function with Undeclared Variable
 
-function semantic4 returns boolean;
+function semantic4 a: integer, c: integer returns integer;
 begin
-    (b + 2) * (2 + 4);
+    if (a > 10) then
+        c + a;
+    else
+        c * a;
+    endif;
 end;

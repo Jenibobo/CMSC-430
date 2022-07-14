@@ -22,9 +22,9 @@ line		   [\n]
 comment		(\-\-.*{line})|(\/\/.*{line}) 
 id			   [A-Za-z]([_]?[A-Za-z0-9])*
 digit		   [0-9]
-int_lit		[0-9]+
 punc		   [\(\),:;]
 
+int_lit		[0-9]+
 real_lit	   [0-9]*\.?[0-9]+([eE][+-]?[0-9]+)?
 bool_lit 	(true|false)
 
@@ -43,13 +43,10 @@ bool_lit 	(true|false)
 
 "+"		   { ECHO; yylval.oper = PLUS; return(ADDOP); }
 "*"		   { ECHO; yylval.oper = MULTIPLY; return(MULOP); }
-"-"         { ECHO; yylval.oper = MINUS; return(RELOP); }
-"/"         { ECHO; yylval.oper = DIVIDE; return(RELOP); }
+"-"         { ECHO; yylval.oper = MINUS; return(ADDOP); }
+"/"         { ECHO; yylval.oper = DIVIDE; return(MULOP); }
 "%"         { ECHO; yylval.oper = MODULUS; return(REMOP); }    
 "**"        { ECHO; yylval.oper = POWER; return(EXPOP); }
-
-"=>"        { ECHO; yylval.oper = CASE_ARROW; return(ARROW); }
-
 
 begin		   { ECHO; return(BEGIN_); }
 end			{ ECHO; return(END); }
@@ -64,18 +61,17 @@ and			{ ECHO; return(ANDOP); }
 or			   { ECHO; return(OROP); }
 not			{ ECHO; return(NOTOP); }
 
-case		   { ECHO; return(CASE); }
-endcase		{ ECHO; return(ENDCASE); }
 if			   { ECHO; return(IF); }
 else		   { ECHO; return(ELSE); }
 endif		   { ECHO; return(ENDIF); }
-others		{ ECHO; return(OTHERS); }
 then		   { ECHO; return(THEN); }
-when		   { ECHO; return(WHEN); }
+
 
 real		   { ECHO; return(REAL); }
 boolean		{ ECHO; return(BOOLEAN); }
 integer		{ ECHO; return(INTEGER); }
+
+tr
 
 {id}		   { 
                ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); 
@@ -83,8 +79,16 @@ integer		{ ECHO; return(INTEGER); }
             }
 
 {int_lit}   { ECHO; yylval.value = atoi(yytext); return(INT_LITERAL); }
+{real_lit}  { ECHO; yylval.value = atoi(yytext); return(REAL_LITERAL); }
+{bool_lit}  { ECHO; yylval.value = atoi(yytext); return(BOOL_LITERAL); }
 
 {punc}		{ ECHO; return(yytext[0]); }
 .		      { ECHO; appendError(LEXICAL, yytext); }
 
 %%
+
+// case		   { ECHO; return(CASE); }
+// endcase		{ ECHO; return(ENDCASE); }
+// others		{ ECHO; return(OTHERS); }
+// when		   { ECHO; return(WHEN); }
+// "=>"        { ECHO; yylval.oper = CASE_ARROW; return(ARROW); }

@@ -9,4 +9,4 @@ enum Operators {LESS, GREATER, LESS_EQUAL, GREATER_EQUAL, EQUAL, NOT_EQUAL, MULT
 int evaluateReduction(Operators operator_, int head, int tail);
 int evaluateRelational(int left, Operators operator_, int right);
 int evaluateArithmetic(int left, Operators operator_, int right);
-
+int evaluate_ifThen(int expr, int if_stat, int else_stat);
