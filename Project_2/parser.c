@@ -562,7 +562,7 @@ static const yytype_uint8 yyrline[] =
       54,    54,    58,    62,    63,    64,    68,    72,    73,    77,
       78,    79,    80,    84,    85,    89,    89,    93,    97,    97,
      102,   103,   108,   109,   114,   115,   125,   126,   131,   132,
-     133,   137,   138,   143,   144,   148,   149,   150,   151,   152
+     133,   138,   139,   144,   145,   149,   150,   151,   152,   153
 };
 #endif
 
@@ -1680,7 +1680,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 155 "parser.y"
+#line 156 "parser.y"
 
 
 void yyerror(const char* message) {

@@ -16,6 +16,14 @@ begin
             endreduce;
         endreduce;
     else
-        a + b;
+        case a is 
+            when 0 =>
+                if (a < 1) then 
+                    a + b;
+                else
+                    a;
+                endif;
+            others => b;
+        endcase;
     endif;
 end;
