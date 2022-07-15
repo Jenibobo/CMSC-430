@@ -1529,102 +1529,96 @@ yyreduce:
 
   case 24: /* statement: CASE expression $@1 IS case_ OTHERS ARROW statement_ ENDCASE  */
 #line 104 "parser_test.y"
-                                                                                        { (yyval.value) == evaluate_caseStat((yyvsp[-4].value), (yyvsp[-1].value)); }
+                                                                                        { (yyval.value) = evaluate_caseStat((yyvsp[-4].value), (yyvsp[-1].value));}
 #line 1534 "parser_test.tab.c"
-    break;
-
-  case 27: /* case_: case_ case  */
-#line 113 "parser_test.y"
-                   { (yyval.value) = eval_cases((yyvsp[-1].value), (yyvsp[0].value)); }
-#line 1540 "parser_test.tab.c"
     break;
 
   case 28: /* case_: %empty  */
 #line 114 "parser_test.y"
         {}
-#line 1546 "parser_test.tab.c"
+#line 1540 "parser_test.tab.c"
     break;
 
   case 29: /* case: WHEN INT_LITERAL ARROW statement_  */
 #line 118 "parser_test.y"
-                                          { (yyval.value) = find_matched_case((yyvsp[-2].value), (yyvsp[0].value)); }
-#line 1552 "parser_test.tab.c"
+                                          { find_matched_case((yyvsp[-2].value), (yyvsp[0].value)); cout << (yyvsp[-2].value) << "  --------  " << (yyvsp[0].value); }
+#line 1546 "parser_test.tab.c"
     break;
 
   case 30: /* reduction_: reduction_ statement_  */
 #line 122 "parser_test.y"
                               { (yyval.value) = evaluateReduction((yyvsp[-2].oper), (yyvsp[-1].value), (yyvsp[0].value)); }
-#line 1558 "parser_test.tab.c"
+#line 1552 "parser_test.tab.c"
     break;
 
   case 31: /* reduction_: %empty  */
 #line 123 "parser_test.y"
     { (yyval.value) = (yyvsp[0].oper) == PLUS ? 0 : 1; }
-#line 1564 "parser_test.tab.c"
+#line 1558 "parser_test.tab.c"
     break;
 
   case 32: /* expression: expression OROP binary_op relation  */
 #line 128 "parser_test.y"
                                            { (yyval.value) = (yyvsp[-3].value) || (yyvsp[-1].value); }
-#line 1570 "parser_test.tab.c"
+#line 1564 "parser_test.tab.c"
     break;
 
   case 34: /* binary_op: binary_op ANDOP relation  */
 #line 134 "parser_test.y"
                                  { (yyval.value) = (yyvsp[-2].value) && (yyvsp[0].value); }
-#line 1576 "parser_test.tab.c"
+#line 1570 "parser_test.tab.c"
     break;
 
   case 36: /* relation: relation RELOP term  */
 #line 140 "parser_test.y"
                             { (yyval.value) = evaluateRelational((yyvsp[-2].value), (yyvsp[-1].oper), (yyvsp[0].value)); }
-#line 1582 "parser_test.tab.c"
+#line 1576 "parser_test.tab.c"
     break;
 
   case 38: /* term: term ADDOP factor  */
 #line 151 "parser_test.y"
                           { (yyval.value) = evaluateArithmetic((yyvsp[-2].value), (yyvsp[-1].oper), (yyvsp[0].value)); }
-#line 1588 "parser_test.tab.c"
+#line 1582 "parser_test.tab.c"
     break;
 
   case 40: /* factor: factor MULOP exp_op  */
 #line 157 "parser_test.y"
                             { (yyval.value) = evaluateArithmetic((yyvsp[-2].value), (yyvsp[-1].oper), (yyvsp[0].value)); }
-#line 1594 "parser_test.tab.c"
+#line 1588 "parser_test.tab.c"
     break;
 
   case 41: /* factor: factor REMOP exp_op  */
 #line 158 "parser_test.y"
                             { (yyval.value) = evaluateArithmetic((yyvsp[-2].value), (yyvsp[-1].oper), (yyvsp[0].value)); }
-#line 1600 "parser_test.tab.c"
+#line 1594 "parser_test.tab.c"
     break;
 
   case 43: /* exp_op: unary_op EXPOP exp_op  */
 #line 164 "parser_test.y"
                               { (yyval.value) = evaluateArithmetic((yyvsp[-2].value), (yyvsp[-1].oper), (yyvsp[0].value)); }
-#line 1606 "parser_test.tab.c"
+#line 1600 "parser_test.tab.c"
     break;
 
   case 45: /* unary_op: NOTOP primary  */
 #line 170 "parser_test.y"
                       { (yyval.value) = ! (yyvsp[0].value); }
-#line 1612 "parser_test.tab.c"
+#line 1606 "parser_test.tab.c"
     break;
 
   case 47: /* primary: '(' expression ')'  */
 #line 175 "parser_test.y"
                            { (yyval.value) = (yyvsp[-1].value); }
-#line 1618 "parser_test.tab.c"
+#line 1612 "parser_test.tab.c"
     break;
 
   case 51: /* primary: IDENTIFIER  */
 #line 179 "parser_test.y"
                    { if (!symbols.find((yyvsp[0].iden), (yyval.value))) appendError(UNDECLARED, (yyvsp[0].iden)); }
-#line 1624 "parser_test.tab.c"
+#line 1618 "parser_test.tab.c"
     break;
 
 
-#line 1628 "parser_test.tab.c"
+#line 1622 "parser_test.tab.c"
 
       default: break;
     }

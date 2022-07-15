@@ -43,9 +43,11 @@ real_lit	   [0-9]*\.?[0-9]+([eE][+-]?[0-9]+)?
 "+"		   { ECHO; yylval.oper = PLUS; return(ADDOP); }
 "*"		   { ECHO; yylval.oper = MULTIPLY; return(MULOP); }
 "-"         { ECHO; yylval.oper = MINUS; return(ADDOP); }
-"/"         { ECHO; yylval.oper = DIVIDE; return(MULOP); }
-"%"         { ECHO; yylval.oper = MODULUS; return(REMOP); }    
+"/"         { ECHO; yylval.oper = DIVIDE; return(MULOP); }    
 "**"        { ECHO; yylval.oper = POWER; return(EXPOP); }
+rem         { ECHO; yylval.oper = MODULUS; return(REMOP); }
+
+"=>"        { ECHO; return(ARROW); }
 
 begin		   { ECHO; return(BEGIN_); }
 end			{ ECHO; return(END); }
@@ -65,13 +67,17 @@ else		   { ECHO; return(ELSE); }
 endif		   { ECHO; return(ENDIF); }
 then		   { ECHO; return(THEN); }
 
+case		   { ECHO; return(CASE); }
+endcase		{ ECHO; return(ENDCASE); }
+others		{ ECHO; return(OTHERS); }
+when		   { ECHO; return(WHEN); }
 
 real		   { ECHO; return(REAL); }
 boolean		{ ECHO; return(BOOLEAN); }
 integer		{ ECHO; return(INTEGER); }
 
-true        { ECHO; return(BOOL_LITERAL); }
-false       { ECHO; return(BOOL_LITERAL); }
+true        { ECHO; yylval.value = true; return(BOOL_LITERAL); }
+false       { ECHO; yylval.value = false; return(BOOL_LITERAL); }
 
 {id}		   { 
                ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); 

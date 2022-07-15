@@ -13,15 +13,22 @@ using namespace std;
 #include "listing.h"
 
 int case_condition;
-int total_cases;
-
+int matched_condition;
 bool met_condition = false;
 
-int evaluate_ifThen(int expr, int if_stat, int else_stat) {
-	if (expr == 1) {
-		return if_stat;
+int evaluate_caseStat(int case_list, int other_stat) {
+	if (met_condition == true) {
+		met_condition = false;
+		return matched_condition;
 	} else {
-		return else_stat;
+		return other_stat;
+	}
+}
+
+void find_matched_case(int num, int case_stat) {
+	if (case_condition == num) {
+		met_condition = true;
+		matched_condition = case_stat;
 	}
 }
 
@@ -29,28 +36,12 @@ void set_condition(int condition) {
 	case_condition = condition;
 }
 
-int evaluate_caseStat(int case_list, int other_stat) {
-	// case_condition = expr;
-	printf("%4d\n", case_condition);
-	if (met_condition == true) {
-		met_condition = false;
-		return total_cases;
-	} else {
-		return other_stat;
-	}
-}
 
-int eval_cases(int case_head, int case_tail) {
-	total_cases = case_head + case_tail;
-	return total_cases;
-}
-
-int find_matched_case(int num, int case_stat) {
-	if (case_condition == num) {
-		met_condition = true;
-		return case_stat;
+int evaluate_ifThen(int expr, int if_stat, int else_stat) {
+	if (expr == 1) {
+		return if_stat;
 	} else {
-		return 0;
+		return else_stat;
 	}
 }
 

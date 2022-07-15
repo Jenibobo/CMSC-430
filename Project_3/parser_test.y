@@ -101,7 +101,7 @@ statement:
 	REDUCE operator reduction_ ENDREDUCE { $$ = $3; } |
 	IF expression THEN statement_ { $$ = evaluate_ifThen($2, $4, 0); } |
 	IF expression THEN statement_ ELSE statement_ ENDIF { $$ = evaluate_ifThen($2, $4, $6); } |
-	CASE expression { set_condition($2); } IS case_ OTHERS ARROW statement_ ENDCASE { $$ == evaluate_caseStat($5, $8); }
+	CASE expression { set_condition($2); } IS case_ OTHERS ARROW statement_ ENDCASE { $$ = evaluate_caseStat($5, $8);}
 ;
 
 operator:
@@ -110,12 +110,12 @@ operator:
 ;
 
 case_:
-	case_ case { $$ = eval_cases($1, $2); } |
+	case_ case |
 	{}
 ;
 
 case:
-	WHEN INT_LITERAL ARROW statement_ { $$ = find_matched_case($2, $4); }
+	WHEN INT_LITERAL ARROW statement_ { find_matched_case($2, $4); cout << $2 << "  --------  " << $4; } 
 ;
 
 reduction_:

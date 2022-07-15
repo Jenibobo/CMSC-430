@@ -3,12 +3,11 @@
 --      - if statments
 --      - switch case
 
-function test_2 returns boolean;
-a: integer is 2;
-t: boolean is true;
-f: boolean is false;
+function test_2 a: integer returns boolean;
+    t: boolean is true;
+    f: boolean is false;
 begin
-    if (a < 5) and (a > 0) then 
+    if ((a < 5) and (a > 0)) then 
         case a is
             when 0 =>  f;
             when 1 =>  f;
