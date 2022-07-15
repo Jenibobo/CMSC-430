@@ -1,9 +1,14 @@
 
 function semantic4 a: integer, c: integer returns integer;
+// t: boolean is true; still not working!!
 begin
     if (a > 10) then
-        c + a;
+        101;
     else
-        c * a;
+        if (a = c) then
+            a;
+        else
+            c;
+        endif;
     endif;
 end;

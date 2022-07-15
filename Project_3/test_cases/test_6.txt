@@ -1,0 +1,17 @@
+// Function that throws just syntax errors
+//      syntax errors: 4
+
+function text_6 x integer returns boolean;
+    a: true;
+    b: boolean 1;
+begin
+    if (x > 10) or (x = 0) then
+        if (x < 20) then
+            true;
+        else
+            false;
+        endif;
+    else
+        true;
+    endif;
+end;

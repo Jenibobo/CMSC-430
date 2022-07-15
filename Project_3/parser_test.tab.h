@@ -63,9 +63,9 @@ extern int yydebug;
     REMOP = 264,                   /* REMOP  */
     EXPOP = 265,                   /* EXPOP  */
     RELOP = 266,                   /* RELOP  */
-    NOTOP = 267,                   /* NOTOP  */
-    OROP = 268,                    /* OROP  */
-    ANDOP = 269,                   /* ANDOP  */
+    OROP = 267,                    /* OROP  */
+    ANDOP = 268,                   /* ANDOP  */
+    NOTOP = 269,                   /* NOTOP  */
     INTEGER = 270,                 /* INTEGER  */
     REAL = 271,                    /* REAL  */
     BOOLEAN = 272,                 /* BOOLEAN  */
@@ -79,7 +79,12 @@ extern int yydebug;
     IF = 280,                      /* IF  */
     THEN = 281,                    /* THEN  */
     ELSE = 282,                    /* ELSE  */
-    ENDIF = 283                    /* ENDIF  */
+    ENDIF = 283,                   /* ENDIF  */
+    CASE = 284,                    /* CASE  */
+    WHEN = 285,                    /* WHEN  */
+    ARROW = 286,                   /* ARROW  */
+    OTHERS = 287,                  /* OTHERS  */
+    ENDCASE = 288                  /* ENDCASE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -94,7 +99,7 @@ union YYSTYPE
 	Operators oper;
 	int value;
 
-#line 98 "parser_test.tab.h"
+#line 103 "parser_test.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

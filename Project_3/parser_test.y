@@ -39,15 +39,14 @@ queue<int> param_list;
 %token <value> REAL_LITERAL
 %token <value> BOOL_LITERAL
 
-%token <oper> ADDOP MULOP REMOP EXPOP RELOP NOTOP
+%token <oper> ADDOP MULOP REMOP EXPOP RELOP
 
-%token OROP ANDOP
+%token OROP ANDOP NOTOP
 %token INTEGER REAL BOOLEAN
 %token BEGIN_ END FUNCTION IS RETURNS
 %token REDUCE ENDREDUCE IF THEN ELSE ENDIF
-
-%type <value> body statement_ statement reduction_ expression relation term
-	factor primary binary_op exp_op unary_op
+%token CASE WHEN ARROW OTHERS ENDCASE
+%type <value> body statement_ statement reduction_ expression relation term factor primary binary_op exp_op unary_op case_ case
 %type <oper> operator
 
 %%
@@ -100,8 +99,9 @@ statement_:
 statement:
 	expression |
 	REDUCE operator reduction_ ENDREDUCE { $$ = $3; } |
-	IF expression THEN statement_ ELSE statement_ ENDIF { $$ = evaluate_ifThen($2, $4, $6); }
-	// CASE expression IS case_ OTHERS ARROW statement_ ENDCASE {}
+	IF expression THEN statement_ { $$ = evaluate_ifThen($2, $4, 0); } |
+	IF expression THEN statement_ ELSE statement_ ENDIF { $$ = evaluate_ifThen($2, $4, $6); } |
+	CASE expression { set_condition($2); } IS case_ OTHERS ARROW statement_ ENDCASE { $$ == evaluate_caseStat($5, $8); }
 ;
 
 operator:
@@ -109,18 +109,18 @@ operator:
 	MULOP 
 ;
 
-// case_:
-// 	case_ case |
-//     /* empty */ {}
-// ;
+case_:
+	case_ case { $$ = eval_cases($1, $2); } |
+	{}
+;
 
-// case:
-// 	WHEN INT_LITERAL ARROW statement_
-// ;
+case:
+	WHEN INT_LITERAL ARROW statement_ { $$ = find_matched_case($2, $4); }
+;
 
 reduction_:
 	reduction_ statement_ { $$ = evaluateReduction($<oper>0, $1, $2); } |
-    /* empty */ { $$ = $<oper>0 == PLUS ? 0 : 1; }
+    { $$ = $<oper>0 == PLUS ? 0 : 1; }
 ;
 
 // OROP has the lowest precedence		    
@@ -187,10 +187,6 @@ void yyerror(const char* message)
 
 int main(int argc, char *argv[]) {
     int i = 1;
-
-    // for (int i=1; i < argc; i++) {
-    //     param_list.push(atoi(argv[i]));
-    // }
 
     while(i < argc) {
         param_list.push(atoi(argv[i]));

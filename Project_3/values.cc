@@ -12,6 +12,11 @@ using namespace std;
 #include "values.h"
 #include "listing.h"
 
+int case_condition;
+int total_cases;
+
+bool met_condition = false;
+
 int evaluate_ifThen(int expr, int if_stat, int else_stat) {
 	if (expr == 1) {
 		return if_stat;
@@ -20,17 +25,34 @@ int evaluate_ifThen(int expr, int if_stat, int else_stat) {
 	}
 }
 
-// int evaluateCase_stat(){
+void set_condition(int condition) {
+	case_condition = condition;
+}
 
-// }
+int evaluate_caseStat(int case_list, int other_stat) {
+	// case_condition = expr;
+	printf("%4d\n", case_condition);
+	if (met_condition == true) {
+		met_condition = false;
+		return total_cases;
+	} else {
+		return other_stat;
+	}
+}
 
-// int evaluateCase_mult(){
+int eval_cases(int case_head, int case_tail) {
+	total_cases = case_head + case_tail;
+	return total_cases;
+}
 
-// }
-
-// int evaluateCase_single(){
-
-// }
+int find_matched_case(int num, int case_stat) {
+	if (case_condition == num) {
+		met_condition = true;
+		return case_stat;
+	} else {
+		return 0;
+	}
+}
 
 int evaluateReduction(Operators operator_, int head, int tail) {
 	if (operator_ == PLUS)
@@ -82,14 +104,14 @@ int evaluateArithmetic(int left, Operators operator_, int right) {
 			if (right != 0) {
 				result = left / right;
 			} else {
-				printf("Zero_Division_Error: Cannot divide by zero.");
+				printf("\nZero_Division_Error: Cannot divide by zero.");
 			}
 			break;
 		case MODULUS:
 			result = left % right;
 			break;
 		case POWER:
-			result = pow(right, left);
+			result = pow(left, right);
 			break;
 	}
 	return result;

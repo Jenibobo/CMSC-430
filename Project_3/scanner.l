@@ -26,7 +26,6 @@ punc		   [\(\),:;]
 
 int_lit		[0-9]+
 real_lit	   [0-9]*\.?[0-9]+([eE][+-]?[0-9]+)?
-bool_lit 	(true|false)
 
 %%
 
@@ -71,7 +70,8 @@ real		   { ECHO; return(REAL); }
 boolean		{ ECHO; return(BOOLEAN); }
 integer		{ ECHO; return(INTEGER); }
 
-tr
+true        { ECHO; return(BOOL_LITERAL); }
+false       { ECHO; return(BOOL_LITERAL); }
 
 {id}		   { 
                ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); 
@@ -80,7 +80,6 @@ tr
 
 {int_lit}   { ECHO; yylval.value = atoi(yytext); return(INT_LITERAL); }
 {real_lit}  { ECHO; yylval.value = atoi(yytext); return(REAL_LITERAL); }
-{bool_lit}  { ECHO; yylval.value = atoi(yytext); return(BOOL_LITERAL); }
 
 {punc}		{ ECHO; return(yytext[0]); }
 .		      { ECHO; appendError(LEXICAL, yytext); }
