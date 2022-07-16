@@ -18,10 +18,10 @@ using namespace std;
 int yylex();
 void yyerror(const char* message);
 
-Symbols<int> symbols;
+Symbols<double> symbols;
 
-int result;
-queue<int> param_list;
+double result;
+queue<double> param_list;
 
 %}
 
@@ -31,7 +31,7 @@ queue<int> param_list;
 {
 	CharPtr iden;
 	Operators oper;
-	int value;
+	double value;
 }
 
 %token <iden> IDENTIFIER
@@ -115,7 +115,7 @@ case_:
 ;
 
 case:
-	WHEN INT_LITERAL ARROW statement_ { find_matched_case($2, $4); cout << $2 << "  --------  " << $4; } 
+	WHEN INT_LITERAL ARROW statement_ { find_matched_case($2, $4); ; } 
 ;
 
 reduction_:
@@ -125,7 +125,7 @@ reduction_:
 
 // OROP has the lowest precedence		    
 expression:
-	expression OROP binary_op relation { $$ = $1 || $3; } |
+	expression OROP binary_op { $$ = $1 || $3; } |
 	binary_op 
 ;
 

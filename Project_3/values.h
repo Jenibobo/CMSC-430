@@ -6,10 +6,10 @@
 typedef char* CharPtr;
 enum Operators {LESS, GREATER, LESS_EQUAL, GREATER_EQUAL, EQUAL, NOT_EQUAL, MULTIPLY, PLUS, MINUS, DIVIDE, MODULUS, POWER, CASE_ARROW};
 
-int evaluateReduction(Operators operator_, int head, int tail);
-int evaluateRelational(int left, Operators operator_, int right);
-int evaluateArithmetic(int left, Operators operator_, int right);
-int evaluate_ifThen(int expr, int if_stat, int else_stat);
-int evaluate_caseStat(int total_cases, int other_stat);
-void find_matched_case(int num, int case_stat);
-void set_condition(int condition);
+double evaluateReduction(Operators operator_, double head, double tail);
+double evaluateRelational(double left, Operators operator_, double right);
+double evaluateArithmetic(double left, Operators operator_, double right);
+double evaluate_ifThen(int expr, double if_stat, double else_stat);
+double evaluate_caseStat(double total_cases, double other_stat);
+void find_matched_case(int num, double case_stat);
+void set_condition(double condition);

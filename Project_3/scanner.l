@@ -85,15 +85,9 @@ false       { ECHO; yylval.value = false; return(BOOL_LITERAL); }
             }
 
 {int_lit}   { ECHO; yylval.value = atoi(yytext); return(INT_LITERAL); }
-{real_lit}  { ECHO; yylval.value = atoi(yytext); return(REAL_LITERAL); }
+{real_lit}  { ECHO; yylval.value = atof(yytext); return(REAL_LITERAL); }
 
 {punc}		{ ECHO; return(yytext[0]); }
 .		      { ECHO; appendError(LEXICAL, yytext); }
 
 %%
-
-// case		   { ECHO; return(CASE); }
-// endcase		{ ECHO; return(ENDCASE); }
-// others		{ ECHO; return(OTHERS); }
-// when		   { ECHO; return(WHEN); }
-// "=>"        { ECHO; yylval.oper = CASE_ARROW; return(ARROW); }

@@ -48,7 +48,7 @@ Grammar
    29 reduction_: reduction_ statement_
    30           | ε
 
-   31 expression: expression OROP binary_op relation
+   31 expression: expression OROP binary_op
    32           | binary_op
 
    33 binary_op: binary_op ANDOP relation
@@ -176,7 +176,7 @@ Nonterminals, with rules where they appear
         on right: 31 32 33
     relation <value> (57)
         on left: 35 36
-        on right: 31 33 34 35
+        on right: 33 34 35
     term <value> (58)
         on left: 37 38
         on right: 35 36 37
@@ -542,7 +542,7 @@ State 33
 State 34
 
    18 statement: expression •
-   31 expression: expression • OROP binary_op relation
+   31 expression: expression • OROP binary_op
 
     OROP  shift, and go to state 59
 
@@ -705,7 +705,7 @@ State 54
 
    20 statement: IF expression • THEN statement_
    21          | IF expression • THEN statement_ ELSE statement_ ENDIF
-   31 expression: expression • OROP binary_op relation
+   31 expression: expression • OROP binary_op
 
     OROP  shift, and go to state 59
     THEN  shift, and go to state 69
@@ -714,7 +714,7 @@ State 54
 State 55
 
    23 statement: CASE expression • $@1 IS case_ OTHERS ARROW statement_ ENDCASE
-   31 expression: expression • OROP binary_op relation
+   31 expression: expression • OROP binary_op
 
     OROP  shift, and go to state 59
 
@@ -725,7 +725,7 @@ State 55
 
 State 56
 
-   31 expression: expression • OROP binary_op relation
+   31 expression: expression • OROP binary_op
    46 primary: '(' expression • ')'
 
     OROP  shift, and go to state 59
@@ -748,7 +748,7 @@ State 58
 
 State 59
 
-   31 expression: expression OROP • binary_op relation
+   31 expression: expression OROP • binary_op
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
@@ -982,23 +982,12 @@ State 72
 
 State 73
 
-   31 expression: expression OROP binary_op • relation
+   31 expression: expression OROP binary_op •
    33 binary_op: binary_op • ANDOP relation
 
-    IDENTIFIER    shift, and go to state 23
-    INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
-    ANDOP         shift, and go to state 60
-    NOTOP         shift, and go to state 27
-    '('           shift, and go to state 31
+    ANDOP  shift, and go to state 60
 
-    relation  go to state 85
-    term      go to state 37
-    factor    go to state 38
-    exp_op    go to state 39
-    unary_op  go to state 40
-    primary   go to state 41
+    $default  reduce using rule 31 (expression)
 
 
 State 74
@@ -1080,7 +1069,7 @@ State 83
    20 statement: IF expression THEN statement_ •
    21          | IF expression THEN statement_ • ELSE statement_ ENDIF
 
-    ELSE  shift, and go to state 86
+    ELSE  shift, and go to state 85
 
     $default  reduce using rule 20 (statement)
 
@@ -1091,20 +1080,10 @@ State 84
 
     $default  reduce using rule 27 (case_)
 
-    case_  go to state 87
+    case_  go to state 86
 
 
 State 85
-
-   31 expression: expression OROP binary_op relation •
-   35 relation: relation • RELOP term
-
-    RELOP  shift, and go to state 61
-
-    $default  reduce using rule 31 (expression)
-
-
-State 86
 
    21 statement: IF expression THEN statement_ ELSE • statement_ ENDIF
 
@@ -1119,7 +1098,7 @@ State 86
     CASE          shift, and go to state 30
     '('           shift, and go to state 31
 
-    statement_  go to state 88
+    statement_  go to state 87
     statement   go to state 33
     expression  go to state 34
     binary_op   go to state 35
@@ -1131,62 +1110,89 @@ State 86
     primary     go to state 41
 
 
-State 87
+State 86
 
    23 statement: CASE expression $@1 IS case_ • OTHERS ARROW statement_ ENDCASE
    26 case_: case_ • case
 
-    WHEN    shift, and go to state 89
-    OTHERS  shift, and go to state 90
+    WHEN    shift, and go to state 88
+    OTHERS  shift, and go to state 89
 
-    case  go to state 91
+    case  go to state 90
+
+
+State 87
+
+   21 statement: IF expression THEN statement_ ELSE statement_ • ENDIF
+
+    ENDIF  shift, and go to state 91
 
 
 State 88
 
-   21 statement: IF expression THEN statement_ ELSE statement_ • ENDIF
+   28 case: WHEN • INT_LITERAL ARROW statement_
 
-    ENDIF  shift, and go to state 92
+    INT_LITERAL  shift, and go to state 92
 
 
 State 89
 
-   28 case: WHEN • INT_LITERAL ARROW statement_
+   23 statement: CASE expression $@1 IS case_ OTHERS • ARROW statement_ ENDCASE
 
-    INT_LITERAL  shift, and go to state 93
+    ARROW  shift, and go to state 93
 
 
 State 90
-
-   23 statement: CASE expression $@1 IS case_ OTHERS • ARROW statement_ ENDCASE
-
-    ARROW  shift, and go to state 94
-
-
-State 91
 
    26 case_: case_ case •
 
     $default  reduce using rule 26 (case_)
 
 
-State 92
+State 91
 
    21 statement: IF expression THEN statement_ ELSE statement_ ENDIF •
 
     $default  reduce using rule 21 (statement)
 
 
-State 93
+State 92
 
    28 case: WHEN INT_LITERAL • ARROW statement_
 
-    ARROW  shift, and go to state 95
+    ARROW  shift, and go to state 94
+
+
+State 93
+
+   23 statement: CASE expression $@1 IS case_ OTHERS ARROW • statement_ ENDCASE
+
+    error         shift, and go to state 22
+    IDENTIFIER    shift, and go to state 23
+    INT_LITERAL   shift, and go to state 24
+    REAL_LITERAL  shift, and go to state 25
+    BOOL_LITERAL  shift, and go to state 26
+    NOTOP         shift, and go to state 27
+    REDUCE        shift, and go to state 28
+    IF            shift, and go to state 29
+    CASE          shift, and go to state 30
+    '('           shift, and go to state 31
+
+    statement_  go to state 95
+    statement   go to state 33
+    expression  go to state 34
+    binary_op   go to state 35
+    relation    go to state 36
+    term        go to state 37
+    factor      go to state 38
+    exp_op      go to state 39
+    unary_op    go to state 40
+    primary     go to state 41
 
 
 State 94
 
-   23 statement: CASE expression $@1 IS case_ OTHERS ARROW • statement_ ENDCASE
+   28 case: WHEN INT_LITERAL ARROW • statement_
 
     error         shift, and go to state 22
     IDENTIFIER    shift, and go to state 23
@@ -1213,46 +1219,19 @@ State 94
 
 State 95
 
-   28 case: WHEN INT_LITERAL ARROW • statement_
+   23 statement: CASE expression $@1 IS case_ OTHERS ARROW statement_ • ENDCASE
 
-    error         shift, and go to state 22
-    IDENTIFIER    shift, and go to state 23
-    INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
-    NOTOP         shift, and go to state 27
-    REDUCE        shift, and go to state 28
-    IF            shift, and go to state 29
-    CASE          shift, and go to state 30
-    '('           shift, and go to state 31
-
-    statement_  go to state 97
-    statement   go to state 33
-    expression  go to state 34
-    binary_op   go to state 35
-    relation    go to state 36
-    term        go to state 37
-    factor      go to state 38
-    exp_op      go to state 39
-    unary_op    go to state 40
-    primary     go to state 41
+    ENDCASE  shift, and go to state 97
 
 
 State 96
-
-   23 statement: CASE expression $@1 IS case_ OTHERS ARROW statement_ • ENDCASE
-
-    ENDCASE  shift, and go to state 98
-
-
-State 97
 
    28 case: WHEN INT_LITERAL ARROW statement_ •
 
     $default  reduce using rule 28 (case)
 
 
-State 98
+State 97
 
    23 statement: CASE expression $@1 IS case_ OTHERS ARROW statement_ ENDCASE •
 

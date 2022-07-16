@@ -1,29 +1,36 @@
--- Testing the use of:
---      - optional variables
---      - if/else statement
---      - arithmetic operations
---      - nested reduce statement
+-- Discussion post for week 5
 
-function test_1 returns integer;
-    a: integer is 10;
-    b: integer is 0;
+function wk_5 x: integer, y: integer, z: boolean returns integer;
+    even_num:integer is x * (x + 1);
+    odd_num: integer is (2 * y) + 1;
+    real_num: real is odd_num * 22.5;
 begin
-    if (a > 5) and (b < 5) then
-        reduce -
-            a + b;
-            reduce /
-                a;
-            endreduce;
-        endreduce;
-    else
-        case a is 
-            when 0 =>
-                if (a < 1) then 
-                    a + b;
+   if (x > 0 or y > 0) then
+        if (x <= 3 and y <= 3) then
+            case x is 
+                when 0 => even_num + odd_num;
+                when 1 => odd_num ** even_num;
+                when 2 => even_num rem x;
+                others => odd_num / y;
+            endcase;
+        else
+            if (y >= 3) and not (y >= 10) then 
+                reduce *
+                    y + 2;
+                    reduce +
+                        3;
+                    endreduce;
+                endreduce; 
+            else
+                if (z = true) then
+                    even_num;
                 else
-                    a;
+                    odd_num;
                 endif;
-            others => b;
-        endcase;
-    endif;
+            endif;
+        endif;    
+   else
+        real_num;
+   endif;
+
 end;

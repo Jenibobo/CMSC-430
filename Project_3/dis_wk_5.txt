@@ -1,0 +1,29 @@
+// Week 5 discussion post:
+-- Program should compile sucsessfully when testing 
+-- all operators, types, and values, and statements.
+
+
+function dis_wk_5 a: integer, b: integer, c: integer, t_f: boolean returns real;
+    r_1: real is 3.0;
+    r_2: real is 2.5;
+    r_3: real is 1.0;
+begin
+    if ((a > 0 and a <= 10) and (b > 0) and (c /= 0 and c >= 10)) then
+        ((a * c) + (c rem a)) / b;
+    else
+        if ((a = 20) or (c < 10) and not (c > 5)) then
+            reduce *
+                r_1;
+                r_2;
+                reduce +
+                    r_3;
+                endreduce;
+            endreduce;
+        else
+            case t_f is 
+                when 0 => (a - b) ** (b rem c);
+                others => 1;
+            endcase;
+        endif;
+    endif;
+end;

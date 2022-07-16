@@ -97,7 +97,7 @@ union YYSTYPE
 
 	CharPtr iden;
 	Operators oper;
-	int value;
+	double value;
 
 #line 103 "parser.tab.h"
 

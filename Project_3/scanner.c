@@ -1048,7 +1048,7 @@ YY_RULE_SETUP
 case 42:
 YY_RULE_SETUP
 #line 88 "scanner.l"
-{ ECHO; yylval.value = atoi(yytext); return(REAL_LITERAL); }
+{ ECHO; yylval.value = atof(yytext); return(REAL_LITERAL); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
@@ -2072,9 +2072,3 @@ void yyfree (void * ptr )
 
 #line 93 "scanner.l"
 
-
-// case		   { ECHO; return(CASE); }
-// endcase		{ ECHO; return(ENDCASE); }
-// others		{ ECHO; return(OTHERS); }
-// when		   { ECHO; return(WHEN); }
-// "=>"        { ECHO; yylval.oper = CASE_ARROW; return(ARROW); }

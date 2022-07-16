@@ -13,10 +13,10 @@ using namespace std;
 #include "listing.h"
 
 int case_condition;
-int matched_condition;
+double matched_condition;
 bool met_condition = false;
 
-int evaluate_caseStat(int case_list, int other_stat) {
+double evaluate_caseStat(double case_list, double other_stat) {
 	if (met_condition == true) {
 		met_condition = false;
 		return matched_condition;
@@ -25,19 +25,19 @@ int evaluate_caseStat(int case_list, int other_stat) {
 	}
 }
 
-void find_matched_case(int num, int case_stat) {
+void find_matched_case(int num, double case_stat) {
 	if (case_condition == num) {
 		met_condition = true;
 		matched_condition = case_stat;
 	}
 }
 
-void set_condition(int condition) {
+void set_condition(double condition) {
 	case_condition = condition;
 }
 
 
-int evaluate_ifThen(int expr, int if_stat, int else_stat) {
+double evaluate_ifThen(int expr, double if_stat, double else_stat) {
 	if (expr == 1) {
 		return if_stat;
 	} else {
@@ -45,15 +45,15 @@ int evaluate_ifThen(int expr, int if_stat, int else_stat) {
 	}
 }
 
-int evaluateReduction(Operators operator_, int head, int tail) {
+double evaluateReduction(Operators operator_, double head, double tail) {
 	if (operator_ == PLUS)
 		return head + tail;
 	return head * tail;
 }
 
 
-int evaluateRelational(int left, Operators operator_, int right) {
-	int result;
+double evaluateRelational(double left, Operators operator_, double right) {
+	double result;
 	switch (operator_)
 	{
 		case LESS:
@@ -78,8 +78,8 @@ int evaluateRelational(int left, Operators operator_, int right) {
 	return result;
 }
 
-int evaluateArithmetic(int left, Operators operator_, int right) {
-	int result;
+double evaluateArithmetic(double left, Operators operator_, double right) {
+	double result;
 	switch (operator_)
 	{
 		case PLUS:
@@ -94,12 +94,14 @@ int evaluateArithmetic(int left, Operators operator_, int right) {
 		case DIVIDE:
 			if (right != 0) {
 				result = left / right;
-			} else {
-				printf("\nZero_Division_Error: Cannot divide by zero.");
 			}
 			break;
 		case MODULUS:
-			result = left % right;
+			if (left == 0 and right == 0) {
+				result = 0;
+			} else {
+				result = fmod(left, right);
+			}
 			break;
 		case POWER:
 			result = pow(left, right);

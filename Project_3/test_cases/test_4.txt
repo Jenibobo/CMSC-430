@@ -9,7 +9,7 @@ function test_4 returns boolean;
     c: integer is a * b;
     d: integer is c - a;
 begin
-    if (a < b) or (c < a) not (b <= d) then
+    if (a < b or c < a) and not (b <= d) then
         true;
     else
         false;
