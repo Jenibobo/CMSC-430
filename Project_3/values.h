@@ -5,7 +5,7 @@
 
 // Edited by: Jennifer McClintock
 // Date: 18 July 2022
-// Declaring the four new functions added to the value.cc file
+// Declaring the four new functions added to the value.cc file, and the additional tokens
 //      - double evaluate_ifThen
 //      - double evaluate_caseStat
 //      - void find_matched_case
