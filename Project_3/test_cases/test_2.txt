@@ -1,7 +1,13 @@
--- A guessing game that tests the use of:
---      - user passed input
---      - if statments
---      - switch case
+
+// Function testing:
+--  - Command line inputs/parameters
+--  - Boolean, Integer
+--  - If/Else statement
+--  - Case statemant
+--  - Logical ops: and
+--  - Relational ops: > <
+--  -
+--  -
 
 function test_2 a: integer returns boolean;
     t: boolean is true;

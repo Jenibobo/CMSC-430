@@ -1,17 +1,23 @@
--- Testing the use of:
-//      - all relational operators
---      - arithmetic operations
-//      - all logical operators
 
-function test_4 returns boolean;
-    a: integer is 2;
-    b: integer is 4;
-    c: integer is a * b;
-    d: integer is c - a;
+-- Function testing errors for:
+--  Lexical errors - 3 errors
+--      - line 21: Unknown symbol " '$' "
+--  Syntax errors - 2 errors
+--      - line 13: Expecting ':' and parameter type
+--      - line 22: Expecting ';' after ENDIF.
+--  Semantic errors - 6 errors
+--      - line 17, 19, 21: var_1 and var_2 are undeclared variables
+
+
+
+function test_4 var_1, var_2 returns integer;
+    var_1 = var_1 * 3.5;
+    var_2 = var_2 * 1.0;
+
 begin
-    if (a < b or c < a) and not (b <= d) then
-        true;
+    if (var_1 > var_2) then
+        var_2 - var_1;
     else
-        false;
-    endif; 
+        '$'(var_1 - var_2);
+    endif
 end;

@@ -3,6 +3,15 @@
 
 // This file contains function definitions for the evaluation functions
 
+// Edited by: Jennifer McClintock
+// Date: 18 July 2022
+// Declaring the four new functions added to the value.cc file
+//      - double evaluate_ifThen
+//      - double evaluate_caseStat
+//      - void find_matched_case
+//      - void set_condition
+
+
 typedef char* CharPtr;
 enum Operators {LESS, GREATER, LESS_EQUAL, GREATER_EQUAL, EQUAL, NOT_EQUAL, MULTIPLY, PLUS, MINUS, DIVIDE, MODULUS, POWER, CASE_ARROW};
 

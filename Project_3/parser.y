@@ -1,6 +1,16 @@
 /* Compiler Theory and Design
    Duane J. Jarc */
 
+// Code edited by: Jennifer McClintock
+// Date: 6 July 2022
+// Code edited to reflect parsing instructions in order to create the synyax for
+// out course languange. Comments put in to explain each syntax rule.
+
+// Date: 18 July 2022
+// Code edited in order add an interpreter in teh parser.y file to interpret
+// the program. Added features that will accept command line arguments, and 
+// added statement features, like nested if/else staements.
+
 %{
 
 #include <iostream>
@@ -74,10 +84,15 @@ parameter_:
 	parameter |
 ;
 
+// Using insert() from symbols.h and passing the IDENTIFIER($1) and param_list.front(). 
+// Param_list is a queue that will house all command line arguments. Using queue so that 
+// it can be dymanic. The main() will push all arguments until none are left. Then the 
+// param_list.front() will pass each node in the front of the queue then pop then out of
+// queue.
 parameter:
 	IDENTIFIER ':' type {
         symbols.insert($1, param_list.front());
-		cout << " <--- " << param_list.front() ;
+		// cout << " <--- " << param_list.front() ;
         param_list.pop();
     }
 ;
@@ -96,7 +111,16 @@ statement_:
 	statement ';' |
 	error ';' { $$ = 0; }
 ;
-	
+
+// I added the another IF statement rule in order to be able to have nested IF statements. The
+// evaluate_ifThen($2, $4, $6) will pass the expression($2), statement_($4), and statement($6). 
+// If the expression for the if condtion is true then if will return the if statement. Other wise
+// it will return the else_statement
+//
+// For the Case statement, set_condition($2) will set the case condition to the expression($2). Then 
+// evaluate_caseStat($5, $8) will take the case_($5) and (others)statement_($8)and try to match the
+// condition to an IN_LITERAL. If one is found it will return that Case statement. Otherwise it will return 
+// the others statement.
 statement:
 	expression |
 	REDUCE operator reduction_ ENDREDUCE { $$ = $3; } |
@@ -115,8 +139,10 @@ case_:
 	{}
 ;
 
+// The find_matched_case($2, $4) will take the INT_LITERAL($2) and the statement_($4) and try to
+// match the case condition to the INT_LITERAL. 
 case:
-	WHEN INT_LITERAL ARROW statement_ { find_matched_case($2, $4); ; } 
+	WHEN INT_LITERAL ARROW statement_ { find_matched_case($2, $4); } 
 ;
 
 reduction_:

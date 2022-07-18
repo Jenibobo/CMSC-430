@@ -1,6 +1,14 @@
 /* Compiler Theory and Design
    Duane J. Jarc */
 
+   // Code edited by: Jennifer McClintock
+	// Date: 25 June 2022
+	// Code edited in order to add the additional lexemes need for our course language.
+
+   // Date: 18 July 2022
+   // File edited in order at add individual oper tokens to operators, and value types to 
+   // INT_LIT, BOOL_LIT, and REAL_LIT
+
 /* This file contains flex input file */
 
 %{
