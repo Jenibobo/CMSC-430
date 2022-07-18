@@ -77,6 +77,7 @@ parameter_:
 parameter:
 	IDENTIFIER ':' type {
         symbols.insert($1, param_list.front());
+		cout << " <--- " << param_list.front() ;
         param_list.pop();
     }
 ;

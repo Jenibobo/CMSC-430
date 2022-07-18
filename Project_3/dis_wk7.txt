@@ -1,0 +1,4 @@
+function get_avg var_1: integer, var_2: integer, var_3: integer returns integer;
+begin
+    (var_1 + var_2 + var_3) / 3;
+end;
