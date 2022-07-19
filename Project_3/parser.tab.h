@@ -56,8 +56,8 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     IDENTIFIER = 258,              /* IDENTIFIER  */
     INT_LITERAL = 259,             /* INT_LITERAL  */
-    REAL_LITERAL = 260,            /* REAL_LITERAL  */
-    BOOL_LITERAL = 261,            /* BOOL_LITERAL  */
+    BOOL_LITERAL = 260,            /* BOOL_LITERAL  */
+    REAL_LITERAL = 261,            /* REAL_LITERAL  */
     ADDOP = 262,                   /* ADDOP  */
     MULOP = 263,                   /* MULOP  */
     REMOP = 264,                   /* REMOP  */

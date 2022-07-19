@@ -84,8 +84,8 @@ real		   { ECHO; return(REAL); }
 boolean		{ ECHO; return(BOOLEAN); }
 integer		{ ECHO; return(INTEGER); }
 
-true        { ECHO; yylval.value = true; return(BOOL_LITERAL); }
-false       { ECHO; yylval.value = false; return(BOOL_LITERAL); }
+true        { ECHO; yylval.value=true; return(BOOL_LITERAL); }
+false       { ECHO; yylval.value=false; return(BOOL_LITERAL); }
 
 {id}		   { 
                ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); 

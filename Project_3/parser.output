@@ -88,8 +88,8 @@ Terminals, with rules where they appear
     error (256) 3 5 17
     IDENTIFIER <iden> (258) 2 7 11 50
     INT_LITERAL <value> (259) 28 47
-    REAL_LITERAL <value> (260) 48
-    BOOL_LITERAL <value> (261) 49
+    BOOL_LITERAL <value> (260) 49
+    REAL_LITERAL <value> (261) 48
     ADDOP <oper> (262) 24 37
     MULOP <oper> (263) 25 39
     REMOP <oper> (264) 40
@@ -327,8 +327,8 @@ State 15
     error         shift, and go to state 22
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     REDUCE        shift, and go to state 28
     IF            shift, and go to state 29
@@ -426,16 +426,16 @@ State 24
 
 State 25
 
-   48 primary: REAL_LITERAL •
+   49 primary: BOOL_LITERAL •
 
-    $default  reduce using rule 48 (primary)
+    $default  reduce using rule 49 (primary)
 
 
 State 26
 
-   49 primary: BOOL_LITERAL •
+   48 primary: REAL_LITERAL •
 
-    $default  reduce using rule 49 (primary)
+    $default  reduce using rule 48 (primary)
 
 
 State 27
@@ -444,8 +444,8 @@ State 27
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     '('           shift, and go to state 31
 
     primary  go to state 50
@@ -468,8 +468,8 @@ State 29
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -489,8 +489,8 @@ State 30
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -510,8 +510,8 @@ State 31
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -752,8 +752,8 @@ State 59
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -772,8 +772,8 @@ State 60
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -791,8 +791,8 @@ State 61
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -809,8 +809,8 @@ State 62
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -826,8 +826,8 @@ State 63
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -842,8 +842,8 @@ State 64
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -858,8 +858,8 @@ State 65
 
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     '('           shift, and go to state 31
 
@@ -882,8 +882,8 @@ State 67
     error         shift, and go to state 22
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     REDUCE        shift, and go to state 28
     IF            shift, and go to state 29
@@ -910,8 +910,8 @@ State 68
     error         shift, and go to state 22
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     REDUCE        shift, and go to state 28
     ENDREDUCE     shift, and go to state 81
@@ -939,8 +939,8 @@ State 69
     error         shift, and go to state 22
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     REDUCE        shift, and go to state 28
     IF            shift, and go to state 29
@@ -1090,8 +1090,8 @@ State 85
     error         shift, and go to state 22
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     REDUCE        shift, and go to state 28
     IF            shift, and go to state 29
@@ -1170,8 +1170,8 @@ State 93
     error         shift, and go to state 22
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     REDUCE        shift, and go to state 28
     IF            shift, and go to state 29
@@ -1197,8 +1197,8 @@ State 94
     error         shift, and go to state 22
     IDENTIFIER    shift, and go to state 23
     INT_LITERAL   shift, and go to state 24
-    REAL_LITERAL  shift, and go to state 25
-    BOOL_LITERAL  shift, and go to state 26
+    BOOL_LITERAL  shift, and go to state 25
+    REAL_LITERAL  shift, and go to state 26
     NOTOP         shift, and go to state 27
     REDUCE        shift, and go to state 28
     IF            shift, and go to state 29

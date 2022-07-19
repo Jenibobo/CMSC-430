@@ -6,8 +6,7 @@
 --  - Case statemant
 --  - Logical ops: and
 --  - Relational ops: > <
---  -
---  -
+
 
 function test_2 a: integer returns boolean;
     t: boolean is true;

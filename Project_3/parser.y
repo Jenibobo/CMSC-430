@@ -45,10 +45,7 @@ queue<double> param_list;
 }
 
 %token <iden> IDENTIFIER
-%token <value> INT_LITERAL
-%token <value> REAL_LITERAL
-%token <value> BOOL_LITERAL
-
+%token <value> INT_LITERAL BOOL_LITERAL REAL_LITERAL
 %token <oper> ADDOP MULOP REMOP EXPOP RELOP
 
 %token OROP ANDOP NOTOP
@@ -56,8 +53,9 @@ queue<double> param_list;
 %token BEGIN_ END FUNCTION IS RETURNS
 %token REDUCE ENDREDUCE IF THEN ELSE ENDIF
 %token CASE WHEN ARROW OTHERS ENDCASE
+
 %type <value> body statement_ statement reduction_ expression relation term factor primary binary_op exp_op unary_op case_ case
-%type <oper> operator
+%type <oper> operator 
 
 %%
 
@@ -126,7 +124,7 @@ statement:
 	REDUCE operator reduction_ ENDREDUCE { $$ = $3; } |
 	IF expression THEN statement_ { $$ = evaluate_ifThen($2, $4, 0); } |
 	IF expression THEN statement_ ELSE statement_ ENDIF { $$ = evaluate_ifThen($2, $4, $6); } |
-	CASE expression { set_condition($2); } IS case_ OTHERS ARROW statement_ ENDCASE { $$ = evaluate_caseStat($5, $8);}
+	CASE expression { set_condition($2); } IS case_ OTHERS ARROW statement_ ENDCASE { $$ = evaluate_caseStat($5, $8); }
 ;
 
 operator:
@@ -216,6 +214,7 @@ int main(int argc, char *argv[]) {
     int i = 1;
 
     while(i < argc) {
+		// cout << " ------> " << argv[i];
         param_list.push(atoi(argv[i]));
         i++;
     }

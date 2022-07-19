@@ -30,7 +30,7 @@ begin
         else
             case t_f is 
                 when 0 => (a - b) ** (b rem c);
-                others => 1;
+                others => 5;
             endcase;
         endif;
     endif;

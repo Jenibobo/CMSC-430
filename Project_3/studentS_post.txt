@@ -1,0 +1,85 @@
+// Anthony Hill
+// Week 5 Discussion
+
+function wk5Discussion operationType: boolean, operatorType: integer, varA: integer returns real;
+	
+	varB: real is 5.23;
+	varC: integer is 2;
+	varD: boolean is false;
+	
+begin
+	if operationType = true then
+		case operatorType is
+			when 1 => varA + varB;
+			when 2 => varA - varB;
+			when 3 => varA * varB;
+			when 4 => varA / varB;
+			when 5 => varA rem varC;
+			when 6 => varA ** 3;
+			when 7 => (varA + varB) * 3.25 / 2 ** 3;
+			when 8 => reduce *
+					    varA + varB;
+					    3;
+					  endreduce;
+			others => 0;
+		endcase;
+	else
+		case operatorType is
+			when 1 => 
+				if varA < varB then
+					1;
+				else
+					0;
+				endif;
+			when 2 => 
+				if varA <= varB then
+					1;
+				else
+					0;
+				endif;
+			when 3 =>
+				if varA > varB then
+					1;
+				else
+					0;
+				endif;
+			when 4 =>
+				if varA >= varB then
+					1;
+				else
+					0;
+				endif;
+			when 5 =>
+				if varA = varB then
+					1;
+				else
+					0;
+				endif;
+			when 6 =>
+				if varA /= varB then
+					1;
+				else
+					0;
+				endif;
+			when 7 =>
+				if varA > varB and varA < 20.21 then
+					1;
+				else
+					0;
+				endif;
+			when 8 =>
+				if varA < varB or varA >= 31.2 then
+					1;
+				else
+					0;
+				endif;
+			when 9 =>
+				if not varD and varA > 0 then
+					1;
+				else
+					0;
+				endif;
+			others => 0;
+		endcase;		
+	endif;
+end;
