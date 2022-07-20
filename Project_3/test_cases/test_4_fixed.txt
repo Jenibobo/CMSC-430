@@ -1,0 +1,16 @@
+
+-- Function testing errors fixed for test 4.
+
+
+
+function test_4 var_1: integer, var_2: integer returns real;
+    var_1: real is var_1 * 3.5;
+    var_2: real is var_2 * 1.0;
+
+begin
+    if (var_1 > var_2) then
+        var_2 - var_1;
+    else
+        var_1 - var_2;
+    endif;
+end;

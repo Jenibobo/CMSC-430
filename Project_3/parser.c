@@ -1855,8 +1855,15 @@ int main(int argc, char *argv[]) {
     int i = 1;
 
     while(i < argc) {
-		// cout << " ------> " << argv[i];
-        param_list.push(atoi(argv[i]));
+		const char check_bool = tolower(*argv[i]);
+
+		if (check_bool == 't') {
+			*argv[i] = '1';
+		}
+		else if (check_bool == 'f') {
+			*argv[i] = '0';
+		}
+		param_list.push(atoi(argv[i]));
         i++;
     }
 
