@@ -3,6 +3,12 @@
 
 // This file contains the bodies of the evaluation functions
 
+// Edited by: Jennifer McClintock
+// Date: 18 July 2022
+// Added funtions that allow evaluation of case, and if statements. Along with added the remaining 
+// logic, arithmetic, and relation operators. 
+
+
 #include <string>
 #include <vector>
 #include <cmath>
