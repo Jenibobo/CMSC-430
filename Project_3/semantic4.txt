@@ -1,14 +1,11 @@
 
-function semantic4 a: integer, c: integer returns integer;
-// t: boolean is true; still not working!!
+function semantic4 returns boolean;
+    t: boolean is true;
+    a: integer is 12;
 begin
     if (a > 10) then
-        101;
+        true;
     else
-        if (a = c) then
-            a;
-        else
-            c;
-        endif;
+        false;
     endif;
 end;
