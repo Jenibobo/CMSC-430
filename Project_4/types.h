@@ -6,7 +6,7 @@
 
 typedef char* CharPtr;
 
-enum Types {MISMATCH, INT_TYPE, BOOL_TYPE};
+enum Types {MISMATCH, INT_TYPE, BOOL_TYPE, REAL_TYPE};
 
 void checkAssignment(Types lValue, Types rValue, string message);
 Types checkArithmetic(Types left, Types right);
