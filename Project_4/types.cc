@@ -11,18 +11,16 @@ using namespace std;
 #include "types.h"
 #include "listing.h"
 
-void checkAssignment(Types lValue, Types rValue, string message)
-{
+void checkAssignment(Types lValue, Types rValue, string message) {
 	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
 		appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
 }
 
-Types checkArithmetic(Types left, Types right)
-{
-	if (left == MISMATCH || right == MISMATCH)
+Types checkArithmetic(Types left, Types right) {
+	if (left == MISMATCH || right == MISMATCH) {
 		return MISMATCH;
-	if (left == BOOL_TYPE || right == BOOL_TYPE)
-	{
+	}
+	if (left == BOOL_TYPE || right == BOOL_TYPE) {
 		appendError(GENERAL_SEMANTIC, "Integer Type Required");
 		return MISMATCH;
 	}
@@ -30,8 +28,7 @@ Types checkArithmetic(Types left, Types right)
 }
 
 
-Types checkLogical(Types left, Types right)
-{
+Types checkLogical(Types left, Types right) {
 	if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
 	if (left != BOOL_TYPE || right != BOOL_TYPE)
@@ -43,8 +40,7 @@ Types checkLogical(Types left, Types right)
 	return MISMATCH;
 }
 
-Types checkRelational(Types left, Types right)
-{
+Types checkRelational(Types left, Types right) {
 	if (checkArithmetic(left, right) == MISMATCH)
 		return MISMATCH;
 	return BOOL_TYPE;
