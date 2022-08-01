@@ -1,0 +1,16 @@
+-- Testing the use of:
+--      - optional variables
+--      - if/else statement
+--      - arithmetic operations
+--      - nested reduce statement
+
+function test_1 returns integer;
+    a: integer is 10;
+    b: integer is 0;
+begin
+    if (a > 5) and (b < 5) then
+        a;
+    else
+        b;
+    endif;
+end;

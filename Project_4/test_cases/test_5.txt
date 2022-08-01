@@ -1,0 +1,18 @@
+// Function that throws syntax errors and lexical errors
+--      lexical errors: 3
+//      syntax errors: 5
+
+function test5_ a integer returns real;
+    b: integer is + 2;
+    c: integer is (a + b);
+begin
+    if (c > 0) then
+        c 2.e-2; 
+    else
+        case c is
+            when 0 =>  + a;
+            when 1 => c ** b;
+            others => $0.50;
+        endcase;
+    ;
+end;
