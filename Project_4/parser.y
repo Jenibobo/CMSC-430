@@ -70,8 +70,11 @@ variable:
 	IDENTIFIER ':' type IS statement_ { 
 		checkAssignment($3, $5, "Variable Initialization");
 		symbols.insert($1, $3); 
-		// cout << $3 << "    " << $5; 
-		} 
+		// cout << $3 << "    " << $5;
+		if (symbols.find($1, $3)) {
+			duplicate_var($1);
+		}
+	} 
 ;
 
 parameter_:
@@ -80,7 +83,7 @@ parameter_:
 ;
 
 parameter:
-	IDENTIFIER ':' type
+	IDENTIFIER ':' type { symbols.insert($1, $3); }
 ;
 
 type:
@@ -90,7 +93,7 @@ type:
 ;
 
 body:
-	BEGIN_ statement_ END ';' 
+	BEGIN_ statement_ END ';' { check_return($2); }
 ;
     
 statement_:
@@ -103,7 +106,7 @@ statement:
 	expression |
 	REDUCE operator reduction_ ENDREDUCE { $$ = $3; } |
 	IF expression THEN statement_ ELSE statement_ ENDIF { check_ifStatemant($2, $4, $6); } |
-	CASE expression { check_caseExpr($2); } IS case_ OTHERS ARROW statement_ ENDCASE { check_caseStatment($8); }
+	CASE expression { check_caseExpr($2); } IS case_ OTHERS ARROW statement_ ENDCASE { check_caseStatment($8); cout << $8; }
 ;
 
 operator:

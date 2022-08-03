@@ -6,7 +6,7 @@
 
 function test_1 returns integer;
     a: integer is 10;
-    b: integer is 0;
+    b: integer is 3;
 begin
     if (a > 5) and (b < 5) then
         a;

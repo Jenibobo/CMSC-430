@@ -1,0 +1,6 @@
+-- Using Arithmetic Expression with Logical Operator
+
+function main a: integer, b: integer returns boolean;
+begin
+    20 = a + b;
+end;

@@ -566,12 +566,12 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    57,    57,    60,    61,    65,    66,    66,    70,    78,
-      79,    79,    83,    87,    88,    89,    93,    97,    98,   103,
-     104,   105,   106,   106,   110,   111,   115,   116,   120,   127,
-     128,   133,   134,   139,   140,   145,   146,   156,   157,   162,
-     163,   164,   169,   170,   176,   177,   181,   182,   183,   184,
-     185
+       0,    57,    57,    60,    61,    65,    66,    66,    70,    81,
+      82,    82,    86,    90,    91,    92,    96,   100,   101,   106,
+     107,   108,   109,   109,   113,   114,   118,   119,   123,   130,
+     131,   136,   137,   142,   143,   148,   149,   159,   160,   165,
+     166,   167,   172,   173,   179,   180,   184,   185,   186,   187,
+     188
 };
 #endif
 
@@ -1477,148 +1477,163 @@ yyreduce:
                                           { 
 		checkAssignment((yyvsp[-2].type), (yyvsp[0].type), "Variable Initialization");
 		symbols.insert((yyvsp[-4].iden), (yyvsp[-2].type)); 
-		// cout << $3 << "    " << $5; 
+		// cout << $3 << "    " << $5;
+		if (symbols.find((yyvsp[-4].iden), (yyvsp[-2].type))) {
+			duplicate_var((yyvsp[-4].iden));
 		}
-#line 1483 "parser.tab.c"
+	}
+#line 1486 "parser.tab.c"
+    break;
+
+  case 12: /* parameter: IDENTIFIER ':' type  */
+#line 86 "parser.y"
+                            { symbols.insert((yyvsp[-2].iden), (yyvsp[0].type)); }
+#line 1492 "parser.tab.c"
     break;
 
   case 13: /* type: INTEGER  */
-#line 87 "parser.y"
+#line 90 "parser.y"
                 { (yyval.type) = INT_TYPE; }
-#line 1489 "parser.tab.c"
+#line 1498 "parser.tab.c"
     break;
 
   case 14: /* type: BOOLEAN  */
-#line 88 "parser.y"
+#line 91 "parser.y"
                 { (yyval.type) = BOOL_TYPE; }
-#line 1495 "parser.tab.c"
+#line 1504 "parser.tab.c"
     break;
 
   case 15: /* type: REAL  */
-#line 89 "parser.y"
+#line 92 "parser.y"
              { (yyval.type) = REAL_TYPE; }
-#line 1501 "parser.tab.c"
+#line 1510 "parser.tab.c"
+    break;
+
+  case 16: /* body: BEGIN_ statement_ END ';'  */
+#line 96 "parser.y"
+                                  { check_return((yyvsp[-2].type)); }
+#line 1516 "parser.tab.c"
     break;
 
   case 18: /* statement_: error ';'  */
-#line 98 "parser.y"
+#line 101 "parser.y"
                   { (yyval.type) = MISMATCH; }
-#line 1507 "parser.tab.c"
+#line 1522 "parser.tab.c"
     break;
 
   case 20: /* statement: REDUCE operator reduction_ ENDREDUCE  */
-#line 104 "parser.y"
+#line 107 "parser.y"
                                              { (yyval.type) = (yyvsp[-1].type); }
-#line 1513 "parser.tab.c"
+#line 1528 "parser.tab.c"
     break;
 
   case 21: /* statement: IF expression THEN statement_ ELSE statement_ ENDIF  */
-#line 105 "parser.y"
+#line 108 "parser.y"
                                                             { check_ifStatemant((yyvsp[-5].type), (yyvsp[-3].type), (yyvsp[-1].type)); }
-#line 1519 "parser.tab.c"
+#line 1534 "parser.tab.c"
     break;
 
   case 22: /* $@1: %empty  */
-#line 106 "parser.y"
+#line 109 "parser.y"
                         { check_caseExpr((yyvsp[0].type)); }
-#line 1525 "parser.tab.c"
+#line 1540 "parser.tab.c"
     break;
 
   case 23: /* statement: CASE expression $@1 IS case_ OTHERS ARROW statement_ ENDCASE  */
-#line 106 "parser.y"
-                                                                                         { check_caseStatment((yyvsp[-1].type)); }
-#line 1531 "parser.tab.c"
+#line 109 "parser.y"
+                                                                                         { check_caseStatment((yyvsp[-1].type)); cout << (yyvsp[-1].type); }
+#line 1546 "parser.tab.c"
     break;
 
   case 27: /* case_: %empty  */
-#line 116 "parser.y"
+#line 119 "parser.y"
         {  }
-#line 1537 "parser.tab.c"
+#line 1552 "parser.tab.c"
     break;
 
   case 28: /* case: WHEN INT_LITERAL ARROW statement_  */
-#line 120 "parser.y"
+#line 123 "parser.y"
                                           { 
 		store_prev_case((yyvsp[0].type));
 		check_caseStatment((yyvsp[0].type));
 	}
-#line 1546 "parser.tab.c"
+#line 1561 "parser.tab.c"
     break;
 
   case 29: /* reduction_: reduction_ statement_  */
-#line 127 "parser.y"
+#line 130 "parser.y"
                               { (yyval.type) = checkArithmetic((yyvsp[-1].type), (yyvsp[0].type)); }
-#line 1552 "parser.tab.c"
+#line 1567 "parser.tab.c"
     break;
 
   case 30: /* reduction_: %empty  */
-#line 128 "parser.y"
+#line 131 "parser.y"
         { (yyval.type) = INT_TYPE; }
-#line 1558 "parser.tab.c"
+#line 1573 "parser.tab.c"
     break;
 
   case 31: /* expression: expression OROP relation  */
-#line 133 "parser.y"
+#line 136 "parser.y"
                                  { (yyval.type) = checkLogical((yyvsp[-2].type), (yyvsp[0].type)); }
-#line 1564 "parser.tab.c"
+#line 1579 "parser.tab.c"
     break;
 
   case 33: /* binary_op: binary_op ANDOP relation  */
-#line 139 "parser.y"
+#line 142 "parser.y"
                                  { (yyval.type) = checkLogical((yyvsp[-2].type), (yyvsp[0].type)); }
-#line 1570 "parser.tab.c"
+#line 1585 "parser.tab.c"
     break;
 
   case 35: /* relation: relation RELOP term  */
-#line 145 "parser.y"
+#line 148 "parser.y"
                             { (yyval.type) = checkRelational((yyvsp[-2].type), (yyvsp[0].type)); }
-#line 1576 "parser.tab.c"
+#line 1591 "parser.tab.c"
     break;
 
   case 37: /* term: term ADDOP factor  */
-#line 156 "parser.y"
+#line 159 "parser.y"
                           { (yyval.type) = checkArithmetic((yyvsp[-2].type), (yyvsp[0].type)); }
-#line 1582 "parser.tab.c"
+#line 1597 "parser.tab.c"
     break;
 
   case 39: /* factor: factor MULOP exp_op  */
-#line 162 "parser.y"
+#line 165 "parser.y"
                              { (yyval.type) = checkArithmetic((yyvsp[-2].type), (yyvsp[0].type)); }
-#line 1588 "parser.tab.c"
+#line 1603 "parser.tab.c"
     break;
 
   case 40: /* factor: factor REMOP exp_op  */
-#line 163 "parser.y"
+#line 166 "parser.y"
                             { (yyval.type) = checkArithmetic((yyvsp[-2].type), (yyvsp[0].type)); }
-#line 1594 "parser.tab.c"
+#line 1609 "parser.tab.c"
     break;
 
   case 42: /* exp_op: unary_op EXPOP exp_op  */
-#line 169 "parser.y"
+#line 172 "parser.y"
                               { (yyval.type) = checkArithmetic((yyvsp[-2].type), (yyvsp[0].type)); }
-#line 1600 "parser.tab.c"
+#line 1615 "parser.tab.c"
     break;
 
   case 44: /* unary_op: NOTOP primary  */
-#line 176 "parser.y"
+#line 179 "parser.y"
                       {  }
-#line 1606 "parser.tab.c"
+#line 1621 "parser.tab.c"
     break;
 
   case 46: /* primary: '(' expression ')'  */
-#line 181 "parser.y"
+#line 184 "parser.y"
                            { (yyval.type) = (yyvsp[-1].type); }
-#line 1612 "parser.tab.c"
+#line 1627 "parser.tab.c"
     break;
 
   case 50: /* primary: IDENTIFIER  */
-#line 185 "parser.y"
+#line 188 "parser.y"
                    {if (!symbols.find((yyvsp[0].iden), (yyval.type))) appendError(UNDECLARED, (yyvsp[0].iden)); }
-#line 1618 "parser.tab.c"
+#line 1633 "parser.tab.c"
     break;
 
 
-#line 1622 "parser.tab.c"
+#line 1637 "parser.tab.c"
 
       default: break;
     }
@@ -1842,7 +1857,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 187 "parser.y"
+#line 190 "parser.y"
 
 
 void yyerror(const char* message)

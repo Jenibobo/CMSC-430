@@ -1,0 +1,7 @@
+-- Undeclared Local
+
+function main b: integer returns integer;
+    b: integer is 11;
+begin
+    2 * b + 3;
+end;
