@@ -2,8 +2,8 @@
 // integer operands. 
 // It will also offer possible corrections for the following semantic errors: Narrowing Variable 
 // Initialization (when a REAL type is forced to an INT type, Case Types are Mismatched (the
-// when cases are returning diferent Tpes), Case Expression is not an INT type, and return 
-// value types are mismatched.
+// when cases are returning diferent Tpes), Case Expression is not an INT type, and return value
+// types are value types are mismatched (a Narrowing Fuction Return).
 //    - var z will be a user passed value
 //    - var x will be the REAL type
 //    - var y will represent another INT type
