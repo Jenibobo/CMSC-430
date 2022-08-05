@@ -1,0 +1,15 @@
+//  Function correcting the use of Booleans with Arithmatic and Relational operators.
+//    - variable b will be a Boolean var.
+//    - vaiable a will be equal to a Arithmatic expression.
+// This should be a possible fix when throwing a semantic error, stating you are not 
+// able to use a Boolean Expression with an Arithmetic Operator.
+
+function test1 returns integer
+  a: integer is (3 + 4);
+begin
+  if (a = 7) then 
+    a + 1;
+  else
+    a + 0;
+  endif;
+end;
