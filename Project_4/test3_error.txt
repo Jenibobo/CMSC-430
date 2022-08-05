@@ -1,0 +1,26 @@
+// Function testing the Remainder operator (rem). The Remainder operator requires 
+// integer operands. 
+// It will also test the semantic error, Narrowing Variable Initialization (when a REAL
+// type is forced to an INT type, Case Types are Mismatched (the when cases are returning
+// diferent Tpes), Case Expression is not an INT type, and return value types are mismatched.
+//    - var z will be a user passed value
+//    - var x will be the REAL type
+//    - var y will represent another INT type
+
+function test_3 z: boolean returns integer;
+    x: real is 9e+3;
+    y: real is 5;
+begin
+    case z is
+        when 0 =>  x + z;
+        when 1 =>  y + z;
+        when 2 =>  x * y;
+        when 3 =>  z - y; 
+        when 4 =>  z / x;
+        when 5 =>  true;
+        when 6 =>  y - x;
+        when 7 =>  x / y;
+        when 8 =>  z ** y;
+        others =>  z rem x;
+    endcase;
+end;
