@@ -3,6 +3,13 @@
 
 // This file contains the bodies of the type checking functions
 
+// Code edited by: Jennifer McClintock
+// Date: 02 August 2022
+// This file was edited to add additional functions that will 
+// identify mis-matched types for our course language. These functions 
+// will be used in conjuction with the parser.y file when reading 
+// the different vars, params, and statements. 
+
 #include <string>
 #include <vector>
 

@@ -11,6 +11,9 @@
 // the program. Added features that will accept command line arguments, and 
 // added statement features, like nested if/else staements.
 
+// Date: 02 August 2022
+// Code edited in order add semantic rules and able to match types using 
+// types.cc file and its functions.
 
 %{
 

@@ -9,6 +9,10 @@
    // File edited in order at add individual oper tokens to operators, and value types to 
    // INT_LIT, BOOL_LIT, and REAL_LIT
 
+   // Date: 02 August 2022
+   // File edited to add the types to BOOL, INT, and REAL in order to match types used in 
+   // our course language.
+
 /* This file contains flex input file */
 
 %{
