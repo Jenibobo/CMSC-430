@@ -1,0 +1,20 @@
+// Function testing the semantic errors thrown in If/Else Statements
+// This should throw semantic errors:
+//       - If and Else Mis-Matched 
+//       - If expression not boolean
+//       - Mis-matched return types
+//       - Duplicate Identifier
+//       - Reduce non-numerics
+
+function test_1 a: integer returns boolean;
+    a: integer is 10;
+    b: integer is 3;
+begin
+    if (a and b) then
+        reduce *
+            0 < a;
+        endreduce;
+    else
+        false;
+    endif;
+end;

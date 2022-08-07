@@ -1,0 +1,19 @@
+// Function correcting the semantic errors thrown in If/Else Statements
+// This should be a possible fix for the semantic errors in test4_error.txt:
+//       - If and Else Mis-Matched 
+//       - If expression not boolean
+//       - Mis-matched return types
+//       - Duplicate Identifier
+//       - Reduce non-numerics
+
+function test_1 a: integer returns integer;
+    b: integer is 3;
+begin
+    if (a > 0 and b > 0) then
+        reduce *
+            b * a;
+        endreduce;
+    else
+        0;
+    endif;
+end;

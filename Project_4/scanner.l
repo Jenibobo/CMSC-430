@@ -81,8 +81,8 @@ real		   { ECHO; return(REAL); }
 boolean		{ ECHO; return(BOOLEAN); }
 integer		{ ECHO; return(INTEGER); }
 
-true        { ECHO; yylval.type = BOOL_TYPE; return(BOOL_LITERAL); }
-false       { ECHO; yylval.type = BOOL_TYPE; return(BOOL_LITERAL); }
+"true"      { ECHO; yylval.type = BOOL_TYPE; return(BOOL_LITERAL); }
+"false"     { ECHO; yylval.type = BOOL_TYPE; return(BOOL_LITERAL); }
 
 {id}		   { 
                ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); 

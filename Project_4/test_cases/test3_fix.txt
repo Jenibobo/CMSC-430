@@ -1,0 +1,27 @@
+// Function correcting the Remainder operator (rem). The Remainder operator requires 
+// integer operands. 
+// It will also offer possible corrections for the following semantic errors: Narrowing Variable 
+// Initialization (when a REAL type is forced to an INT type, Case Types are Mismatched (the
+// when cases are returning diferent Tpes), Case Expression is not an INT type, and return value
+// types are value types are mismatched (a Narrowing Fuction Return).
+//    - var z will be a user passed value
+//    - var x will be the REAL type
+//    - var y will represent another INT type
+
+function test_3 z: integer returns real;
+    x: real is 9e+3;
+    y: integer is 5;
+begin
+    case z is
+        when 0 =>  x + z;
+        when 1 =>  y + z;
+        when 2 =>  x * y;
+        when 3 =>  z - y; 
+        when 4 =>  z / x;
+        when 5 =>  z * x;
+        when 6 =>  y - x;
+        when 7 =>  x / y;
+        when 8 =>  z ** y;
+        others =>  z rem y;
+    endcase;
+end;

@@ -29,6 +29,7 @@ int yylex();
 void yyerror(const char* message);
 
 Symbols<Types> symbols;
+bool startFunc = false;
 
 %}
 
@@ -54,7 +55,8 @@ Symbols<Types> symbols;
 %%
 
 function:	
-	function_header optional_variable body ;
+	function_header optional_variable body 
+;
 	
 function_header:	
 	FUNCTION IDENTIFIER parameter_ RETURNS type ';' { set_returnVal($5); } |
@@ -69,11 +71,11 @@ optional_variable:
 variable:	
 	IDENTIFIER ':' type IS statement_ { 
 		checkAssignment($3, $5, "Variable Initialization");
-		symbols.insert($1, $3); 
 		// cout << $3 << "    " << $5;
 		if (symbols.find($1, $3)) {
 			duplicate_var($1);
 		}
+		symbols.insert($1, $3); 
 	} 
 ;
 
@@ -93,11 +95,15 @@ type:
 ;
 
 body:
-	BEGIN_ statement_ END ';' { check_return($2); }
+	BEGIN_ { startFunc = true; } statement_ END ';' 
 ;
     
 statement_:
-	statement ';' |
+	statement ';' {
+		if (startFunc) {
+			check_return($1);
+		}
+	 } |
 	error ';' { $$ = MISMATCH; } 
 ;
 
@@ -105,8 +111,8 @@ statement_:
 statement:
 	expression |
 	REDUCE operator reduction_ ENDREDUCE { $$ = $3; } |
-	IF expression THEN statement_ ELSE statement_ ENDIF { check_ifStatemant($2, $4, $6); } |
-	CASE expression { check_caseExpr($2); } IS case_ OTHERS ARROW statement_ ENDCASE { check_caseStatment($8); cout << $8; }
+	IF expression { check_ifExpr($2); } THEN statement_ ELSE statement_ ENDIF { check_ifStatemant($5, $7); } |
+	CASE expression { check_caseExpr($2); } IS case_ OTHERS ARROW statement_{ check_caseStatment($8); } ENDCASE {}
 ;
 
 operator:
@@ -120,9 +126,9 @@ case_:
 ;
 
 case:
-	WHEN INT_LITERAL ARROW statement_ { 
-		store_prev_case($4);
+	WHEN INT_LITERAL ARROW statement_ {
 		check_caseStatment($4);
+		store_prev_case($2);
 	}
 ;
 
@@ -163,7 +169,7 @@ term:
 // Adding REMOP as an option for 'factor'
 factor:
 	factor MULOP exp_op  { $$ = checkArithmetic($1, $3); } |
-	factor REMOP exp_op { $$ = checkArithmetic($1, $3); } |
+	factor REMOP exp_op { $$ = checkArithmetic($1, $3); check_remOP($1, $3); } |
 	exp_op  
 ;
 
@@ -176,8 +182,8 @@ exp_op:
 // NOTOP has highest precedence
 //TODO
 unary_op:
-	NOTOP primary {  } |
-	primary
+	NOTOP primary { $$ = $2; } |
+	primary 
 ;
 
 primary:

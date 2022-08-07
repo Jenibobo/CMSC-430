@@ -1,0 +1,11 @@
+//  Function testing the use of Arithmatic with Logical operators.
+//    - var a and b will be user input integers
+//    - var t_f will be a user passed boolean var
+// This function will repesent the semantic error that is thrown when 
+// an Arithmetic Expression is used with a Logical Operator. 
+
+function test2 a: integer, b: integer returns boolean;
+    t_f: boolean is true;
+begin
+  (a / b) and t_f;
+end;

@@ -14,10 +14,12 @@ void set_returnVal(Types initail_returnVal);
 void check_return(Types end_returnVal);
 
 Types checkArithmetic(Types left, Types right);
+void check_remOP(Types l_val, Types r_val);
 Types checkLogical(Types left, Types right);
 Types checkRelational(Types left, Types right);
 
-Types check_ifStatemant(Types expr, Types ifStat, Types elseStat);
+void check_ifExpr(Types expr);
+Types check_ifStatemant(Types ifStat, Types elseStat);
 
 void check_caseExpr(Types expr);
 void check_caseStatment(Types caseAssin);

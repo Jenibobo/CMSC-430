@@ -1,0 +1,14 @@
+//  Function correcting the use of Arithmatic with Logical operators.
+//    - var a and b will be user input integers
+//    - var t_f will be a user passed boolean var
+// This should be a possible fix for a semantic error that is thrown when 
+// an Arithmetic Expression is used with a Logical Operator. 
+
+function test2 a: integer, b: integer returns boolean;
+begin
+  if ((a / b) >= 10) then
+    true;
+  else
+    false;
+  endif;
+end;

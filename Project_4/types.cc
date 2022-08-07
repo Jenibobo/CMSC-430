@@ -32,39 +32,35 @@ void set_returnVal(Types initail_returnVal) {
 }
 
 void check_return(Types end_returnVal) {
+	// printf("%4d", end_returnVal);
+	// printf("%4d", returnVal);
 	if (returnVal != end_returnVal) {
 		if (returnVal == INT_TYPE && end_returnVal == REAL_TYPE) {
 			// printf("%4d", end_returnVal);
 			appendError(GENERAL_SEMANTIC, "Narrowing Variable Initialization: REAL is forced into INT");
 		}
-		if (returnVal == BOOL_TYPE && end_returnVal == REAL_TYPE) {
+		if (returnVal == BOOL_TYPE && (end_returnVal == REAL_TYPE || end_returnVal == INT_TYPE)) {
 			// printf("%4d", end_returnVal);
-			appendError(GENERAL_SEMANTIC, "Type Mismatch: BOOL is not REAL");
+			appendError(GENERAL_SEMANTIC, "Return Type Mismatch: INT or REAL is not BOOL Type");
 		}
-		if (returnVal == BOOL_TYPE && end_returnVal == INT_TYPE) {
-			// printf("%4d", end_returnVal);
-			appendError(GENERAL_SEMANTIC, "Type Mismatch: BOOL is not INT");
-		}
-		if (returnVal == INT_TYPE && end_returnVal == BOOL_TYPE) {
-			// printf("%4d", end_returnVal);
-			appendError(GENERAL_SEMANTIC, "Type Mismatch: INT is not BOOL");
-		}
-		if (returnVal == REAL_TYPE && end_returnVal == BOOL_TYPE) {
-			// printf("%4d", end_returnVal);
-			appendError(GENERAL_SEMANTIC, "Type Mismatch: REAL is not BOOL");
+		if ((returnVal == INT_TYPE || returnVal == REAL_TYPE) && end_returnVal == BOOL_TYPE) {
+			appendError(GENERAL_SEMANTIC, "Return Type Mismatch:  BOOL is not INT or REAL Types");
 		}
 	}
 }
 
-Types check_ifStatemant(Types expr, Types ifStat, Types elseStat) {
+void check_ifExpr(Types expr) {
 	if (expr != BOOL_TYPE) {
 		appendError(GENERAL_SEMANTIC, "If expresstion must be a Boolean.");
-		return MISMATCH;
 	}
-	if ((ifStat != BOOL_TYPE) || (elseStat != BOOL_TYPE)){
+}
+
+Types check_ifStatemant(Types ifStat, Types elseStat) {
+
+	if (ifStat != elseStat){
 		// printf("%4d", ifStat);
 		// printf("%4d", elseStat);
-		appendError(GENERAL_SEMANTIC, "IF type and ELSE type are mis-matched");
+		appendError(GENERAL_SEMANTIC, "IF type and ELSE types are mis-matched");
 		return MISMATCH;
 	}
 	return BOOL_TYPE;
@@ -74,23 +70,25 @@ void check_caseExpr(Types expr) {
 	if (expr != INT_TYPE) {
 		appendError(GENERAL_SEMANTIC, "Case expression must be an Integer");
 	}
-	case_is_int = true;
 }
 
-void store_prev_case(Types prev_caseStat) {
-	saved_case = prev_caseStat;
+void store_prev_case(Types caseType) {
+	saved_case = caseType;
 	// printf("%4d", saved_case);
 }
 
 void check_caseStatment(Types caseAssin) {
 	// printf("%4d", caseAssin);
 
-	if (case_is_int == true) {
-		if (saved_case != caseAssin) {
-			appendError(GENERAL_SEMANTIC, "Case Types do not match.");
+	if (saved_case == BOOL_TYPE && (caseAssin == INT_TYPE || caseAssin == REAL_TYPE)) {
+		appendError(GENERAL_SEMANTIC, "Case Type Mis-Match: Previous case BOOL is not same Type as current");
 			case_is_int = false;
-		}
 	}
+	if ((saved_case == INT_TYPE || saved_case == REAL_TYPE) && caseAssin == BOOL_TYPE ) {
+		appendError(GENERAL_SEMANTIC, "Case Type Mis-Match: Previous case INT or REAL is not same Type as current");
+			case_is_int = false;
+	}
+	
 }
 
 Types checkArithmetic(Types left, Types right) {
@@ -98,13 +96,19 @@ Types checkArithmetic(Types left, Types right) {
 		return MISMATCH;
 	}
 	if (left == BOOL_TYPE || right == BOOL_TYPE) {
-		appendError(GENERAL_SEMANTIC, "Integer Type Required");
+		appendError(GENERAL_SEMANTIC, "Integer Type Required: Boolean Expression cannot be used with Arithmetic Operators");
 		return MISMATCH;
 	}
 	if (left == REAL_TYPE || right == REAL_TYPE){
 			return REAL_TYPE;
 	}
 	return INT_TYPE;
+}
+
+void check_remOP(Types l_val, Types r_val) {
+	if (l_val != INT_TYPE || r_val != INT_TYPE) {
+		appendError(GENERAL_SEMANTIC, "Only integer types can only be used with Remainder operator.");
+	}
 }
 
 
@@ -114,7 +118,7 @@ Types checkLogical(Types left, Types right)
 		return MISMATCH;
 	}
 	if (left != BOOL_TYPE || right != BOOL_TYPE) {
-		appendError(GENERAL_SEMANTIC, "Boolean Type Required");
+		appendError(GENERAL_SEMANTIC, "Boolean Type Required: Arithmatic expressions cannot be used with Logical operators.");
 		return MISMATCH;
 	}	
 	return BOOL_TYPE;
@@ -124,6 +128,7 @@ Types checkLogical(Types left, Types right)
 Types checkRelational(Types left, Types right)
 {
 	if (checkArithmetic(left, right) == MISMATCH) {
+		appendError(GENERAL_SEMANTIC, "Integer Type Required: Boolean Expression cannot be used with Relational Operators");
 		return MISMATCH;	
 	}
 	return BOOL_TYPE;
