@@ -26,8 +26,8 @@ void duplicate_var(string iden_var) {
 	appendError(GENERAL_SEMANTIC, "Duplicate Indentifier: " + iden_var);
 }
 
-void set_returnVal(Types initail_returnVal) {
-	returnVal = initail_returnVal;
+void set_returnVal(Types initial_return) {
+	returnVal = initial_return;
 	// printf("%4d", returnVal);
 }
 
@@ -68,7 +68,7 @@ Types check_ifStatemant(Types ifStat, Types elseStat) {
 
 void check_caseExpr(Types expr) {
 	if (expr != INT_TYPE) {
-		appendError(GENERAL_SEMANTIC, "Case expression must be an Integer");
+		appendError(GENERAL_SEMANTIC, "Case expression must be an INT");
 	}
 }
 
@@ -96,7 +96,7 @@ Types checkArithmetic(Types left, Types right) {
 		return MISMATCH;
 	}
 	if (left == BOOL_TYPE || right == BOOL_TYPE) {
-		appendError(GENERAL_SEMANTIC, "Integer Type Required: Boolean Expression cannot be used with Arithmetic Operators");
+		appendError(GENERAL_SEMANTIC, "INT Type Required: Boolean Expression cannot be used with Arithmetic Operators");
 		return MISMATCH;
 	}
 	if (left == REAL_TYPE || right == REAL_TYPE){
@@ -107,7 +107,7 @@ Types checkArithmetic(Types left, Types right) {
 
 void check_remOP(Types l_val, Types r_val) {
 	if (l_val != INT_TYPE || r_val != INT_TYPE) {
-		appendError(GENERAL_SEMANTIC, "Only integer types can only be used with Remainder operator.");
+		appendError(GENERAL_SEMANTIC, "Only INT types can only be used with Remainder operator.");
 	}
 }
 
@@ -118,7 +118,7 @@ Types checkLogical(Types left, Types right)
 		return MISMATCH;
 	}
 	if (left != BOOL_TYPE || right != BOOL_TYPE) {
-		appendError(GENERAL_SEMANTIC, "Boolean Type Required: Arithmatic expressions cannot be used with Logical operators.");
+		appendError(GENERAL_SEMANTIC, "BOOL Type Required: Arithmatic expressions cannot be used with Logical operators.");
 		return MISMATCH;
 	}	
 	return BOOL_TYPE;
@@ -128,7 +128,7 @@ Types checkLogical(Types left, Types right)
 Types checkRelational(Types left, Types right)
 {
 	if (checkArithmetic(left, right) == MISMATCH) {
-		appendError(GENERAL_SEMANTIC, "Integer Type Required: Boolean Expression cannot be used with Relational Operators");
+		appendError(GENERAL_SEMANTIC, "INT Type Required: Boolean Expression cannot be used with Relational Operators");
 		return MISMATCH;	
 	}
 	return BOOL_TYPE;
